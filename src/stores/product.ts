@@ -80,12 +80,26 @@ export const useProductStore = create<ProductStore>((set) => ({
   fetchCategories: async () => {
     set({ loading: true, error: null });
     try {
+      // Verificar que la URL termina correctamente
+      const baseUrl = import.meta.env.VITE_WORDPRESS_URL.endsWith('/') 
+        ? import.meta.env.VITE_WORDPRESS_URL 
+        : `${import.meta.env.VITE_WORDPRESS_URL}/`;
+        
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}?consumer_key=${import.meta.env.VITE_CONSUMER_KEY}&consumer_secret=${import.meta.env.VITE_CONSUMER_SECRET}`
+        `${baseUrl}wp-json/wc/v3/products/categories?per_page=20`,
+        {
+          headers: {
+            'Authorization': 'Basic ' + btoa(
+              `${import.meta.env.VITE_CLAVE_CLIENTE}:${import.meta.env.VITE_CLAVE_SECRETA}`
+            ),
+            'Accept': 'application/json'  // Asegurarnos de que solicitamos JSON
+          }
+        }
       );
       
       if (!response.ok) {
-        throw new Error('Error fetching categories');
+        console.error('Error response:', await response.text());
+        throw new Error(`Error fetching categories: ${response.status}`);
       }
       
       const categories = await response.json();
@@ -94,7 +108,7 @@ export const useProductStore = create<ProductStore>((set) => ({
         loading: false 
       });
     } catch (error) {
-      set({ error: 'Error fetching categories', loading: false });
+      set({ error: 'Error fetching categories', loading: false, categories: [] });
       console.error('Categories error:', error);
     }
   },
