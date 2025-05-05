@@ -1,12 +1,22 @@
 import { type Section } from '../types';
 import ProductCard from './ProductCard'
-import products from '../data/products.json'
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProductStore } from '../stores/product';
+
 export default function ProductsSection({ section }: { section: Section }) {
   const navigate = useNavigate();
+  const { products, searchByCategoryID, loading } = useProductStore();
+
   const handleSeeAll = () => {
     navigate(`/${section.id}`);
   };
+
+  useEffect(() => {
+    if (section.id) {
+      searchByCategoryID(section.id);
+    }
+  }, [section.id, searchByCategoryID]);
   return (
     <div>
       <section id={section.id} className=" mx-auto  py-6" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
@@ -15,13 +25,19 @@ export default function ProductsSection({ section }: { section: Section }) {
           <button className="btn btn-link btn-sm btn-success" onClick={handleSeeAll}>Ver todos</button>
         </div>
         <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
-          {products.map((product, index) => (
-            <div key={index} className="inline-block">
+          {loading ? (
+          <div className="flex items-center justify-center w-full h-24">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          </div>
+        ) : (
+          products.map((product) => (
+            <div key={product.id} className="inline-block">
               <ProductCard
                 product={product}
               />
             </div>
-          ))}
+          ))
+        )}
         </div>
       </section>
       {/* Imágenes promocionales */}

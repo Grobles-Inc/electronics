@@ -21,6 +21,20 @@ export interface Product {
   specifications?: ProductSpecification[];
 }
 
+export interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  parent: number;
+  count: number;
+  image?: {
+    id: number;
+    src: string;
+    name: string;
+  };
+}
+
 export interface Section {
   name: string;
   id: string;

@@ -1,23 +1,22 @@
-import { Home, Menu, Search, ShoppingBag, Smartphone, Sparkles, Tv, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo.png';
 import { useOrderStore } from '../stores/order';
 import { useProductStore } from '../stores/product';
-
-const categories = [
-  { name: 'Electrónicos', section: '/#electronicos', icon: <Tv size={18} className="mr-2" /> },
-  { name: 'Telefonía', section: '/#telefonia', icon: <Smartphone size={18} className="mr-2" /> },
-  { name: 'Casa, Hogar y Tendencias', section: '/#hogar-cocina', icon: <Home size={18} className="mr-2" /> },
-  { name: 'Perfumería y Cosméticos', section: '/#perfumeria-cosmeticos', icon: <Sparkles size={18} className="mr-2" /> },
-];
+import { Category } from '../types';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const { items } = useOrderStore()
   const navigate = useNavigate();
-  const { searchProducts } = useProductStore();
+  const { items } = useOrderStore()
+  const { fetchCategories, searchProducts } = useProductStore();
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    fetchCategories().then((categories) => setCategories(categories as unknown as Category[]));
+  }, [fetchCategories]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -95,14 +94,13 @@ export default function Header() {
         <nav className="container mx-auto px-8 sm:px-10 md:px-12 lg:px-16">
           <ul className="flex flex-col md:items-center md:flex-row md:justify-center space-y-2 md:space-y-0 md:py-1 py-4">
             {categories.map((category, index) => (
-              <li key={category.section} className="md:px-6 ">
+              <li key={category.id} className="md:px-6 ">
                 <a
-                  href={category.section}
+                  href={category.slug}
                   className="flex py-2 text-gray-800 hover:text-[#ec3434] font-medium transition-colors"
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100 + 400}`}
                 >
-                  {category.icon}
                   {category.name}
                 </a>
               </li>
