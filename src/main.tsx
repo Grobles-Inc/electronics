@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import './index.css'
 import MainLayout from './layout/MainLayout'
 
@@ -17,7 +17,7 @@ root.render(
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/carrito" element={<Cart />} />
-          <Route path="/producto" element={<ProductDetails />} />
+          <Route path="/producto/:id" element={<ProductDetails />} />
         </Route>
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>

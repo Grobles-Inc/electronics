@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Laptop, Smartphone, Headphones } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Slide, Category } from '../types/carousel';
 
 export default function Carousel() {
@@ -108,15 +108,14 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="w-full">
-      <div className="relative overflow-hidden rounded-xl shadow-lg">
+    <div className="w-full" >
+      <div className="relative overflow-hidden rounded-xl shadow-lg" data-aos="fade" data-aos-duration="1000" data-aos-delay="200" data-aos-once="true">
         <div className="relative h-[450px] md:h-[500px]">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
-              className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ${
-                currentSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
+              className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ${currentSlide === index ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
             >
               <div
                 className="absolute inset-0 bg-cover bg-center"
@@ -161,33 +160,32 @@ export default function Carousel() {
           {slides.map((_, index) => (
             <button
               key={index}
-              className={`w-2 h-2 rounded-full transition-all ${
-                currentSlide === index ? 'bg-blue-600 w-6' : 'bg-gray-300'
-              }`}
+              className={`w-2 h-2 rounded-full transition-all ${currentSlide === index ? 'bg-blue-600 w-6' : 'bg-gray-300'
+                }`}
               onClick={() => setCurrentSlide(index)}
             ></button>
           ))}
         </div>
       </div>
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" >
         {categories.map(category => (
-            <Link
+          <Link
             to={category.path}
             key={category.id}
-            
-            >
-             <div className="relative overflow-hidden rounded-lg group shadow-lg hover:shadow-xl transition-shadow aspect-square">
-             <div
-              className="h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
-              style={{ backgroundImage: `url(${category.image})` }}
-            >
-              
-            </div>  
-             </div>
+
+          >
+            <div className="relative overflow-hidden rounded-lg group shadow-lg hover:shadow-xl transition-shadow aspect-square">
+              <div
+                className="h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-300"
+                style={{ backgroundImage: `url(${category.image})` }}
+              >
+
+              </div>
+            </div>
             <div className=" text-gray-900 font-stretch-50% text-center py-2">
               <span className="font-medium">{category.name}</span>
             </div>
-            </Link>
+          </Link>
         ))}
       </div>
     </div>

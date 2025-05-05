@@ -1,239 +1,71 @@
-import Carousel from '../components/Carousel'
-import { Tv, Smartphone, Home, Sparkles } from 'lucide-react';
-import ProductCard from '../components/ProductCard';
-import { FaClock, FaHeadset, FaShoppingBag } from 'react-icons/fa';
+import { Clock, FileWarning, Home, ShoppingBag, Smartphone, Sparkles, Tv } from 'lucide-react';
+import Carousel from '../components/Carousel';
+import ProductsSection from '../components/Section';
 
+
+const categories = [
+  { name: 'Electrónicos', section: 'electronicos', icon: <Tv size={18} className="mr-2" /> },
+  { name: 'Telefonía', section: 'telefonia', icon: <Smartphone size={18} className="mr-2" /> },
+  { name: 'Casa, Hogar y Tendencias', section: 'hogar-cocina', icon: <Home size={18} className="mr-2" /> },
+  { name: 'Perfumería y Cosméticos', section: 'perfumeria-cosmeticos', icon: <Sparkles size={18} className="mr-2" /> },
+];
 export default function HomePage() {
-
-  const products = [
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-    {
-      image: 'https://resource.megaeletronicos.com/uploads/Product/new/1/4/1/6/6/9/141669/1725618551_1725618551.webp',
-      priceGs: 3969802,
-      priceUsd: 498.41,
-      name: 'Smartphone Xiaomi POCO X6 5G NFC Dual SIM de 256GB 8GB RAM de 6.67" 64+8+2MP 16MP - Azul (Global)',
-      stock: true,
-      code: '1461879',
-      id: Math.random(), // Assign a unique ID
-      quantity: 1, // Default quantity
-    },
-
-    // Puedes agregar más productos...
-  ];
-
-  const categories = [
-    { name: 'Belleza', icon: <Sparkles size={24} />, bg: '#fde2e2' },
-    { name: 'Electrónica', icon: <Tv size={24} />, bg: '#e2f0fd' },
-    { name: 'Informática', icon: <Home size={24} />, bg: '#e2fde6' },
-    { name: 'Perfumería', icon: <Sparkles size={24} />, bg: '#f9e2fd' },
-    { name: 'Telefonía', icon: <Smartphone size={24} />, bg: '#e2e6fd' },
-    { name: 'Sonido y Audio', icon: <Tv size={24} />, bg: '#fdfde2' },
-  ];
   return (
     <>
       <Carousel />
-      {/* Categorías */}
-      <div className="container mx-auto  py-8">
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-          {categories.map((cat, idx) => (
-            <div key={idx} className="flex flex-col items-center justify-center p-4 rounded-lg shadow bg-white hover:shadow-md cursor-pointer">
-              <div className="p-4 rounded-full mb-2" style={{ backgroundColor: cat.bg }}>
-                {cat.icon}
-              </div>
-              <span className="text-sm font-medium text-gray-700 text-center">{cat.name}</span>
-            </div>
-          ))}
+      {/* Botón flotante de WhatsApp */}
+      <a
+        href="https://api.whatsapp.com/send?phone=595981123456&text=Hola%21%20Quiero%20hacer%20un%20pedido"
+        className="fixed bottom-4 right-4 z-10"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-delay="300"
+        data-aos-once="true"
+      >
+        <div className="bg-green-500 rounded-full p-3 shadow-lg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp" className="w-8 h-8" />
         </div>
-      </div>
+      </a>
+      <ProductsSection section={{
+        id: 'ofertas-del-dia',
+        name: 'Ofertas del Día',
+      }} />
+      {categories.map(({ name, section }) => (
+        <ProductsSection key={section} section={{
+          id: section,
+          name,
+        }} />
+      ))}
+      <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-4 py-8 " data-aos="fade-up" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
+        {/* Horario de atención */}
+        <div className="flex flex-col px-12  border border-gray-300 p-6 rounded-lg w-full min-h-[300px]" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" data-aos-once="true">
+          <h3 className="font-semibold text-lg mb-4 text-center">Horario de atención</h3>
+          <Clock className="text-red-600 mb-4 mx-auto" size={44} />
+          <p className="text-sm "><strong>Lunes a Viernes:</strong><br />De 06:30hs a 16:30hs.</p>
+          <p className="text-sm "><strong>Sábados:</strong><br />De 06:00hs a 15:00hs.</p>
+        </div>
 
-      {/* Ofertas del día */}
-      <section className=" mx-auto  py-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Ofertas del día</h2>
-        <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent no-scrollbar">
-          {products.map((product, index) => (
-            <div key={index} className="inline-block">
-              <ProductCard 
-                product={product} 
-                onDelete={() => console.log(`Deleted product: ${product.code}`)} 
-                onQuantityChange={(quantity) => console.log(`Quantity changed for product ${product.code}: ${quantity}`)} 
-              />
-            </div>
-          ))}
+        <div className="flex flex-col px-12  border border-gray-300 p-6 rounded-lg w-full min-h-[300px]" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" data-aos-once="true">
+          <h3 className="font-semibold text-lg mb-4 text-center">Atención</h3>
+          <FileWarning className="text-red-600 mb-4 mx-auto" size={44} />
+          <p className="text-sm ">
+            Las ventas online y delivery solo están habilitadas para Paraguay, no tenemos cuentas bancárias en Brasil.<br />
+            No somos responsables por envíos de dinero a nuestros vendedores.
+          </p>
         </div>
-      </section>
-      {/* Imágenes promocionales */} 
-      <div className=" mx-auto py-6">
-        <div className="grid grid-cols-2 gap-4">
-          <img 
-        src="https://xiaomiperu.com/media/MISTORE_Banner_Web_13T-13C_1.jpg" 
-        alt="Promoción 1" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-          <img 
-        src="https://tecstore.pe/media/amasty/bundle/frontend/TEC_STORE_Semana_3_Celulares_Banner_Web_Cat_Desktop.jpg" 
-        alt="Promoción 2" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-        </div>
-      </div>
-       {/* Ofertas del día */}
-       <section className=" mx-auto  py-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Ofertas del día</h2>
-        <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent no-scrollbar">
-         {products.map((product, index) => (
-            <div key={index} className="inline-block">
-              <ProductCard 
-                product={product} 
-                onDelete={() => console.log(`Deleted product: ${product.code}`)} 
-                onQuantityChange={(quantity) => console.log(`Quantity changed for product ${product.code}: ${quantity}`)} 
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-      {/* Imágenes promocionales */} 
-      <div className=" mx-auto py-6">
-        <div className="grid grid-cols-2 gap-4">
-          <img 
-        src="https://xiaomiperu.com/media/MISTORE_Banner_Web_13T-13C_1.jpg" 
-        alt="Promoción 1" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-          <img 
-        src="https://tecstore.pe/media/amasty/bundle/frontend/TEC_STORE_Semana_3_Celulares_Banner_Web_Cat_Desktop.jpg" 
-        alt="Promoción 2" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-        </div>
-      </div>
-       {/* Ofertas del día */}
-       <section className=" mx-auto  py-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Ofertas del día</h2>
-        <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent no-scrollbar">
-          {products.map((product, index) => (
-            <div key={index} className="inline-block">
-              <ProductCard 
-                product={product} 
-                onDelete={() => console.log(`Deleted product: ${product.code}`)} 
-                onQuantityChange={(quantity) => console.log(`Quantity changed for product ${product.code}: ${quantity}`)} 
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-      {/* Imágenes promocionales */} 
-      <div className=" mx-auto py-6">
-        <div className="grid grid-cols-2 gap-4">
-          <img 
-        src="https://xiaomiperu.com/media/MISTORE_Banner_Web_13T-13C_1.jpg" 
-        alt="Promoción 1" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-          <img 
-        src="https://tecstore.pe/media/amasty/bundle/frontend/TEC_STORE_Semana_3_Celulares_Banner_Web_Cat_Desktop.jpg" 
-        alt="Promoción 2" 
-        className="w-full h-auto object-cover rounded-lg shadow"
-          />
-        </div>
-      </div>
-      <div className="flex flex-col md:flex-row justify-between items-center gap-8 px-4 py-8 bg-gray-100">
-      {/* Horario de atención */}
-      <div className="flex flex-col items-center text-center border border-gray-300 p-6 rounded-lg w-full">
-        <h3 className="font-semibold text-lg mb-4">Horario de atención</h3>
-        <FaClock className="text-red-600 text-6xl mb-4" />
-        <p className="text-sm text-gray-600">Lunes a Viernes:<br />De 06:30hs a 16:30hs.</p>
-        <p className="text-sm text-gray-600">Sábados:<br />De 06:00hs a 15:00hs.</p>
-      </div>
 
-      <div className="flex flex-col items-center text-center border border-gray-300 p-6 rounded-lg w-full">
-        <h3 className="font-semibold text-lg mb-4">Atención</h3>
-        <FaHeadset className="text-red-600 text-6xl mb-4" />
-        <p className="text-sm text-gray-600">
-          Las ventas online y delivery solo están habilitadas para Paraguay, no tenemos cuentas bancárias en Brasil.<br />
-          No somos responsables por envíos de dinero a nuestros vendedores.
-        </p>
+        <div className="flex flex-col px-12  border border-gray-300 p-6 rounded-lg w-full min-h-[300px]" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" data-aos-once="true">
+          <h3 className="font-semibold text-lg mb-4 text-center ">Retirar mi compra</h3>
+          <ShoppingBag className="text-red-600 mb-4 mx-auto" size={44} />
+          <p className="text-sm ">
+            El horario asignado para el retiro de compras realizadas a través de este sitio web es de:<br />
+            <strong>Lunes a Viernes:</strong><br />De 06:30hs a 16:30hs.<br />
+            <strong>Sábados:</strong><br />De 06:00hs a 15:00hs.
+          </p>
+        </div>
       </div>
-
-      <div className="flex flex-col items-center text-center border border-gray-300 p-6 rounded-lg w-full">
-        <h3 className="font-semibold text-lg mb-4">Retirar mi compra</h3>
-        <FaShoppingBag className="text-red-600 text-6xl mb-4" />
-        <p className="text-sm text-gray-600">
-          El horario asignado para el retiro de compras realizadas a través de este sitio web es de:<br />
-          Lunes a Viernes:<br />De 06:30hs a 16:30hs.<br />
-          Sábados:<br />De 06:00hs a 15:00hs.
-        </p>
-      </div>
-    </div>
     </>
   )
 }

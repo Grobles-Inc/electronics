@@ -1,46 +1,45 @@
-import { FaFacebookF, FaWhatsapp, FaTiktok, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer className="bg-[#003c88] text-white py-10 text-[200px]">
-      <div className="container mx-auto px-8 sm:px-10 md:px-12 lg:px-16 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-center">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm  px-4 sm:px-6 md:px-8 lg:px-10">
         <div>
           <h3 className="font-[1000] mb-8 ">Perú</h3>
           <p>(045) 3528-9053 - (045) 3528-8462</p>
           <p>(045) 3025-7072 - (045) 3025-7736</p>
-          <div className="flex justify-between mt-10">
+          <div className="flex gap-2 mt-10">
             <a
               href="#"
-              className="bg-white text-[#003c88] p-3 rounded-full hover:bg-gray-200 transition"
+              className="bg-blue-100/20 p-2 rounded-full "
               aria-label="Facebook"
             >
-              <FaFacebookF size={20} />
+              <img src="https://img.icons8.com/?size=100&id=118467&format=png&color=FFFFFF" width={24} height={24} alt="Facebook" />
             </a>
             <a
               href="#"
-              className="bg-white text-[#003c88] p-3 rounded-full hover:bg-gray-200 transition"
+              className="bg-blue-100/20  p-2 rounded-full "
               aria-label="WhatsApp"
             >
-              <FaWhatsapp size={20} />
+              <img src="https://img.icons8.com/?size=100&id=16733&format=png&color=FFFFFF" width={24} height={24} alt="WhatsApp" />
             </a>
             <a
               href="#"
-              className="bg-white text-[#003c88] p-3 rounded-full hover:bg-gray-200 transition"
+              className="bg-blue-100/20 p-2 rounded-full"
               aria-label="TikTok"
             >
-              <FaTiktok size={20} />
+              <img src="https://img.icons8.com/?size=100&id=118638&format=png&color=FFFFFF" width={24} height={24} alt="TikTok" />
             </a>
             <a
               href="#"
-              className="bg-white text-[#003c88] p-3 rounded-full hover:bg-gray-200 transition"
+              className="bg-blue-100/20  p-2 rounded-full"
               aria-label="Instagram"
             >
-              <FaInstagram size={20} />
+              <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=FFFFFF" width={24} height={24} alt="Instagram" />
             </a>
           </div>
         </div>
 
-        
+
 
         {/* Institucional */}
         <div>
@@ -76,7 +75,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center mt-15 text-xs">
-        <p>Todos los derchos reservados 2025 </p>
+        <p>Mega Electrónicos de Importadora Américas S.A. Todos los derechos reservados 2025</p>
       </div>
     </footer>
   );

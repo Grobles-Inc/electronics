@@ -1,9 +1,25 @@
+export interface ProductSpecification {
+  label: string;
+  value: string;
+}
+
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   code: string;
-  priceGs: number;
-  priceUsd: number;
-  quantity: number;
+  categoryId: string;
+  discount?: number;
+  quantity?: number;
+  originalPrice: number;
+  discountPrice?: number;
+  tags?: string[];
+  stock: boolean;
   image: string;
+  specifications?: ProductSpecification[];
+}
+
+export interface Section {
+  name: string;
+  id: string;
+  // products: Product[];
 }
