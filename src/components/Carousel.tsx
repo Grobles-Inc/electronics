@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Snowflake, Smartphone, Headphones } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Laptop, Smartphone, Headphones } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Slide, Category } from '../types/carousel';
 
@@ -11,14 +11,13 @@ export default function Carousel() {
   const slides: Slide[] = [
     {
       id: 1,
-      title: 'AUDISAT',
-      subtitle: 'AIRE ACONDICIONADO',
+      title: 'PORTÁTILES',
+      subtitle: 'ELECTRONICOS',
       buttonText: 'DESCUBRIR',
       buttonLink: '/categoria/aire-acondicionado',
       image: 'https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?q=80&w=1280&auto=format&fit=crop',
-      altText: 'Aire acondicionado Audisat',
-      iconName: 'snowflake',
-      tag: 'DISTRIBUIDOR OFICIAL'
+      altText: 'Ofertas en Portátiles',
+      iconName: 'laptop',
     },
     {
       id: 2,
@@ -26,7 +25,7 @@ export default function Carousel() {
       subtitle: 'OFERTAS ESPECIALES',
       buttonText: 'VER OFERTAS',
       buttonLink: '/categoria/telefonia',
-      image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=1280&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1574675904801-eb2cca16af12?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       altText: 'Ofertas en smartphones',
       iconName: 'smartphone'
     },
@@ -36,7 +35,7 @@ export default function Carousel() {
       subtitle: 'CALIDAD DE SONIDO',
       buttonText: 'EXPLORAR',
       buttonLink: '/categoria/audio',
-      image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?q=80&w=1280&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       altText: 'Equipos de audio premium',
       iconName: 'headphones'
     }
@@ -45,8 +44,8 @@ export default function Carousel() {
   // Función para obtener el icono correspondiente
   const getIconComponent = (iconName?: string) => {
     switch (iconName) {
-      case 'snowflake':
-        return <Snowflake size={36} className="mr-3 text-blue-600" />;
+      case 'laptop':
+        return <Laptop size={36} className="mr-3 text-blue-600" />;
       case 'smartphone':
         return <Smartphone size={36} className="mr-3 text-blue-600" />;
       case 'headphones':
@@ -61,37 +60,37 @@ export default function Carousel() {
     {
       id: 1,
       name: 'Bebidas',
-      image: 'https://images.unsplash.com/photo-1583918092617-bfbd2742ae2d?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1617122387493-34c22fc88560?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/bebidas'
     },
     {
       id: 2,
       name: 'Electrónicos',
-      image: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1562408590-e32931084e23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/electronicos'
     },
     {
       id: 3,
       name: 'Informática',
-      image: 'https://images.unsplash.com/photo-1545239351-ef35f43d514b?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/informatica'
     },
     {
       id: 4,
       name: 'Perfumería',
-      image: 'https://images.unsplash.com/photo-1595425964143-5a3757fd3439?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1618994492420-b4f4d6b4890c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/perfumeria'
     },
     {
       id: 5,
       name: 'Telefonía',
-      image: 'https://images.unsplash.com/photo-1605236453806-6ff36851218e?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/telefonia'
     },
     {
       id: 6,
       name: 'Sonido & Audio',
-      image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?q=80&w=200&auto=format&fit=crop',
+      image: 'https://images.unsplash.com/photo-1703060802519-d294f34da766?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       path: '/categoria/sonido-audio'
     }
   ];
@@ -110,13 +109,13 @@ export default function Carousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="w-full">
       {/* Carrusel principal */}
       <div className="relative overflow-hidden rounded-xl">
         {/* Slides */}
@@ -133,12 +132,11 @@ export default function Carousel() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${slide.image})` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-100/70 to-transparent"></div>
               </div>
 
               {/* Contenido del slide */}
               <div className="relative h-full flex flex-col justify-center p-8 md:p-16">
-                <div className="max-w-2xl">
+                <div className="max-w-2xl text-white">
                   {slide.title && (
                     <div className="flex items-center mb-4">
                       {getIconComponent(slide.iconName)}
@@ -156,14 +154,6 @@ export default function Carousel() {
                     <ChevronRight className="inline-block ml-2" size={20} />
                   </Link>
                   
-                  {/* Tag de distribuidor oficial */}
-                  {slide.tag && (
-                    <div className="absolute bottom-8 left-8 md:bottom-16 md:left-16">
-                      <span className="text-gray-800 font-medium text-lg">
-                        {slide.tag}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

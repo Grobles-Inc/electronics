@@ -17,10 +17,10 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full shadow-md ">
+    <header className="w-full shadow-md">
       <div className='bg-[#ec3434]'>
-        <div className="py-5 max-w-6xl mx-auto">
-          <div className="container mx-auto px-4">
+        <div className="py-5 w-full">
+          <div className="container mx-auto px-8 sm:px-10 md:px-12 lg:px-16">
             {/* Sección superior con logo, búsqueda y carrito */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               {/* Logo y botón de menú móvil */}
@@ -37,7 +37,7 @@ export default function Header() {
                 </button>
               </div>
 
-              <div className="relative w-full md:max-w-md">
+              <div className="relative w-full md:max-w-xl">
                 <input 
                   type="text" 
                   className="bg-white rounded-full py-2 px-4 w-full text-black pr-10" 
@@ -46,7 +46,7 @@ export default function Header() {
                 <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
               </div>
 
-              <div className="hidden md:flex bg-white rounded-full p-2">
+              <div className="md:flex justify-end bg-white rounded-full p-2 hidden">
                 <Link to="/carrito">
                   <ShoppingBag className="text-black" size={24} />
                 </Link>
@@ -57,7 +57,7 @@ export default function Header() {
       </div>
 
       <div className={`bg-white ${isMenuOpen ? 'block' : 'hidden md:block'}`}>
-        <nav className="container mx-auto px-4">
+        <nav className="container mx-auto px-8 sm:px-10 md:px-12 lg:px-16">
           <ul className="flex flex-col md:flex-row md:justify-center space-y-2 md:space-y-0 py-1">
             {categories.map((category) => (
               <li key={category.path} className="md:px-6">
