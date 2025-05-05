@@ -1,63 +1,88 @@
-import { create } from 'zustand';
-import { Product } from '../types';
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { CartItem, Product } from "../types";
 
-interface CartItem {
-  product: Product;
-  quantity: number;
-  id: string;
-}
 
-interface OrderStore {
-  cartItems: CartItem[];
+
+interface CartState {
+  items: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  clearCart: () => void;
+  updateQuantity: (productId: string, quantity: number) => void;
   totalItems: number;
   totalPrice: number;
-  addToCart: (product: Product, quantity: number) => void;
-  removeFromCart: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
-  clearCart: () => void;
 }
 
-export const useOrderStore = create<OrderStore>((set) => ({
-  cartItems: [],
-  totalItems: 0,
-  totalPrice: 0,
-
-  addToCart: (product: Product, quantity: number) => {
-    const id = product.id;
-    const existingItem = useOrderStore.getState().cartItems.find(item => item.id === id);
-
-    if (existingItem) {
-      set((state) => ({
-        cartItems: state.cartItems.map(item => 
-          item.id === id ? { ...item, quantity: item.quantity + quantity } : item
-        )
-      }));
-    } else {
-      set((state) => ({
-        cartItems: [...state.cartItems, { product, quantity, id }]
-      }));
-    }
-  },
-
-  removeFromCart: (id) => {
-    set((state) => ({
-      cartItems: state.cartItems.filter(item => item.id !== id)
-    }));
-  },
-
-  updateQuantity: (id, quantity) => {
-    set((state) => ({
-      cartItems: state.cartItems.map(item => 
-        item.id === id ? { ...item, quantity } : item
-      )
-    }));
-  },
-
-  clearCart: () => {
-    set({
-      cartItems: [],
-      totalItems: 0,
-      totalPrice: 0
-    });
+const getInitialCartItems = (): CartItem[] => {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem("cartItems");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
   }
-}));
+};
+
+export const useOrderStore = create<CartState>()(
+  devtools((set, get) => ({
+    items: getInitialCartItems(),
+    addToCart: (product, quantity = 1) => {
+      set((state: CartState) => {
+        const existing = state.items.find((item) => item.id === product.id);
+        if (existing) {
+          return {
+            items: state.items.map((item) =>
+              item.id === product.id
+                ? { ...item, quantity: Number(item.quantity) + Number(quantity) }
+                : item
+            ),
+          };
+        }
+        return {
+          items: [
+            ...state.items,
+            {
+              ...product,
+              quantity: Number(quantity) || 1,
+            },
+          ],
+        };
+      });
+    },
+    removeFromCart: (productId) => {
+      set((state: CartState) => ({ items: state.items.filter((item) => item.id !== productId) }));
+    },
+    clearCart: () => set({ items: [] }),
+    updateQuantity: (productId, quantity) => {
+      set((state: CartState) => ({
+        items: state.items.map((item) =>
+          item.id === productId ? { ...item, quantity } : item
+        ),
+      }));
+    },
+    get totalItems() {
+      return get().items.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    },
+    get totalPrice() {
+      return get().items.reduce(
+        (sum, item) =>
+          sum +
+          (Number(item.discountPrice) || Number(item.originalPrice)) *
+            (item.quantity || 1),
+        0
+      );
+    }
+  }))
+);
+
+// Persistencia en localStorage
+if (typeof window !== "undefined") {
+  useOrderStore.subscribe((state) => {
+    try {
+      localStorage.setItem("cartItems", JSON.stringify(state.items));
+    } catch { 
+      console.error("Error al guardar el carrito en localStorage");
+    }
+  });
+}

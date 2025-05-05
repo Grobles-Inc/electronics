@@ -1,12 +1,12 @@
+import Logo from "../assets/logo.png"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#003c88] text-white py-10 text-[200px]">
+    <footer className="bg-black text-white py-10 text-[200px]">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm  px-4 sm:px-6 md:px-8 lg:px-10">
         <div>
-          <h3 className="font-[1000] mb-8 ">Perú</h3>
-          <p>(045) 3528-9053 - (045) 3528-8462</p>
-          <p>(045) 3025-7072 - (045) 3025-7736</p>
+          <img src={Logo} alt="Logo" width={150} height={150} />
+          <a href="https://wa.me/51995262244" className="hover:underline">(+51) 995 262 244</a>
           <div className="flex gap-2 mt-10">
             <a
               href="#"
@@ -41,18 +41,6 @@ export default function Footer() {
 
 
 
-        {/* Institucional */}
-        <div>
-          <h3 className="font-bold mb-8">Institucional</h3>
-          <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">Sobre Mega</a></li>
-            <li><a href="#" className="hover:underline">Políticas de privacidad</a></li>
-            <li><a href="#" className="hover:underline">Políticas de garantía</a></li>
-            <li><a href="#" className="hover:underline">Términos y condiciones</a></li>
-            <li><a href="#" className="hover:underline">Políticas de devolución</a></li>
-            <li><a href="#" className="hover:underline">Trabaje con nosotros</a></li>
-          </ul>
-        </div>
 
         {/* Páginas */}
         <div>

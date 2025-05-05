@@ -1,17 +1,24 @@
 import { type Section } from '../types';
 import ProductCard from './ProductCard'
 import products from '../data/products.json'
+import { useNavigate } from 'react-router-dom';
 export default function ProductsSection({ section }: { section: Section }) {
+  const navigate = useNavigate();
+  const handleSeeAll = () => {
+    navigate(`/${section.id}`);
+  };
   return (
-    <>
+    <div>
       <section id={section.id} className=" mx-auto  py-6" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
-        <h2 className="text-2xl font-bold  mb-6">{section.name}</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl md:text-2xl  font-bold  pl-4 md:px-0">{section.name}</h2>
+          <button className="btn btn-link btn-sm btn-success" onClick={handleSeeAll}>Ver todos</button>
+        </div>
         <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
           {products.map((product, index) => (
             <div key={index} className="inline-block">
               <ProductCard
                 product={product}
-                onDelete={() => console.log(`Deleted product: ${product.code}`)}
               />
             </div>
           ))}
@@ -32,6 +39,6 @@ export default function ProductsSection({ section }: { section: Section }) {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }

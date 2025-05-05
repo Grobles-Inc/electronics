@@ -4,7 +4,6 @@ import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product
-  onDelete: (productId: number) => void;
 }
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (

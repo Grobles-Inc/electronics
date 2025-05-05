@@ -1,15 +1,13 @@
-// ProductCard.tsx
 
-import { Product } from "../../types";
+import { Minus, Plus } from "lucide-react";
+import { CartItem } from "../../types";
 
-
-interface ProductCardProps {
-  product: Product;
-  onDelete: (id: number) => void;
-  onQuantityChange: (id: number, quantity: number) => void;
+interface ItemProps {
+  product: CartItem;
+  onDelete: (id: string) => void;
+  onQuantityChange: (id: string, quantity: number) => void;
 }
-
-const ProductCard = ({ product, onDelete, onQuantityChange }: ProductCardProps) => {
+const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center border-b py-4 gap-4">
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
@@ -19,8 +17,8 @@ const ProductCard = ({ product, onDelete, onQuantityChange }: ProductCardProps) 
           <div className="text-sm text-gray-600">Cód.: {product.code}</div>
           <h3 className="font-medium">{product.name}</h3>
           <div className="text-red-500 font-bold mt-2">
-            Gs. {product.priceGs.toLocaleString()}
-            <span className="text-gray-700 ml-2">US$ {product.priceUsd.toFixed(2)}</span>
+            S/. {product.discountPrice ? product.discountPrice.toFixed(2) : product.originalPrice.toFixed(2)}
+
           </div>
         </div>
       </div>
@@ -29,13 +27,14 @@ const ProductCard = ({ product, onDelete, onQuantityChange }: ProductCardProps) 
         <div className="flex items-center">
           <button
             className="btn btn-sm btn-outline"
-            onClick={() => onQuantityChange(product.id, Math.max(1, product.quantity - 1))}
+            disabled={product.quantity <= 1}
+            onClick={() => onQuantityChange(product.id, product.quantity - 1)}
           >
-            -
+            <Minus size={20} />
           </button>
           <input
             type="text"
-            className="input input-bordered w-16 mx-1 text-center"
+            className="w-12 mx-1 text-2xl font-bold text-center"
             value={product.quantity}
             readOnly
           />
@@ -43,7 +42,7 @@ const ProductCard = ({ product, onDelete, onQuantityChange }: ProductCardProps) 
             className="btn btn-sm btn-outline"
             onClick={() => onQuantityChange(product.id, product.quantity + 1)}
           >
-            +
+            <Plus size={20} />
           </button>
         </div>
 
@@ -58,4 +57,4 @@ const ProductCard = ({ product, onDelete, onQuantityChange }: ProductCardProps) 
   );
 };
 
-export default ProductCard;
+export default Item;

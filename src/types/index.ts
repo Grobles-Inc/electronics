@@ -3,13 +3,16 @@ export interface ProductSpecification {
   value: string;
 }
 
+export interface CartItem extends Product {
+  quantity: number;
+}
+
 export interface Product {
   id: string;
   name: string;
   code: string;
   categoryId: string;
   discount?: number;
-  quantity?: number;
   originalPrice: number;
   discountPrice?: number;
   tags?: string[];

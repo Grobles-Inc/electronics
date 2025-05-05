@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Laptop, Smartphone, Headphones } from 'lucide-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Slide, Category } from '../types/carousel';
 
 export default function Carousel() {
@@ -108,7 +108,7 @@ export default function Carousel() {
   }, []);
 
   return (
-    <div className="w-full" >
+    <div className="w-full px-4 md:px-0" >
       <div className="relative overflow-hidden rounded-xl shadow-lg" data-aos="fade" data-aos-duration="1000" data-aos-delay="200" data-aos-once="true">
         <div className="relative h-[450px] md:h-[500px]">
           {slides.map((slide, index) => (
@@ -121,7 +121,7 @@ export default function Carousel() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${slide.image})` }}
               ></div>
-              <div className="relative h-full flex flex-col justify-center p-8 md:p-16">
+              <div className="relative h-full flex flex-col justify-center md:ml-16 ml-2 py-8 md:p-16">
                 <div className="max-w-2xl text-white">
                   {slide.title && (
                     <div className="flex items-center mb-4">
@@ -134,7 +134,7 @@ export default function Carousel() {
                   </h2>
                   <Link
                     to={slide.buttonLink}
-                    className="inline-block mt-6  hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105"
+                    className="inline-block mt-6  bg-[#FA7818] text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105"
                   >
                     {slide.buttonText}
                     <ChevronRight className="inline-block ml-2" size={20} />
@@ -145,13 +145,13 @@ export default function Carousel() {
           ))}
         </div>
         <button
-          className=" cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-3 shadow-lg transition-all"
+          className=" cursor-pointer absolute left-4 md:top-1/2 top-10 -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-3 shadow-lg transition-all"
           onClick={prevSlide}
         >
           <ChevronLeft size={24} className="text-gray-800" />
         </button>
         <button
-          className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-3 shadow-lg transition-all"
+          className="cursor-pointer absolute right-4 md:top-1/2 top-10 -translate-y-1/2 bg-white/70 hover:bg-white/90 rounded-full p-3 shadow-lg transition-all"
           onClick={nextSlide}
         >
           <ChevronRight size={24} className="text-gray-800" />
