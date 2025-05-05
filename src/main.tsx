@@ -5,6 +5,7 @@ import './index.css'
 import MainLayout from './layout/MainLayout'
 
 import HomePage from './pages/HomePage'
+import Cart from './pages/Cart'
 
 const root = createRoot(document.getElementById('root')!)
 
@@ -12,7 +13,10 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/carrito" element={<Cart />} />
+        </Route>
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </BrowserRouter>
