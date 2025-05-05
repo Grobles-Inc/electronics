@@ -1,20 +1,24 @@
 import { Menu, Search, ShoppingBag, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { useOrderStore } from '../stores/order';
 import { useProductStore } from '../stores/product';
+const categories = [
+  { name: 'Electrónicos', section: '#electronicos' },
+  { name: 'Telefonía', section: '#telefonia' },
+  { name: 'Casa', section: '#casa' },
+  { name: 'Hogar y Cocina', section: '#hogar' },
+  { name: 'Tendencias', section: '#tendencias' },
+  { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos' },
+];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { items } = useOrderStore()
-  const { fetchCategories, categories, searchProducts } = useProductStore(); 
-  
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+  const { searchProducts } = useProductStore();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -92,9 +96,9 @@ export default function Header() {
         <nav className="container mx-auto px-8 sm:px-10 md:px-12 lg:px-16">
           <ul className="flex flex-col md:items-center md:flex-row md:justify-center space-y-2 md:space-y-0 md:py-1 py-4">
             {categories && categories.length > 0 ? categories.map((category, index) => (
-              <li key={category.id} className="md:px-6 ">
+              <li key={category.name} className="md:px-6 ">
                 <a
-                  href={category.slug}
+                  href={category.section}
                   className="flex py-2 text-gray-800 hover:text-[#ec3434] font-medium transition-colors"
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100 + 400}`}

@@ -1,5 +1,25 @@
 import { create } from 'zustand';
-import { Product, Category } from '../types';
+import { Product } from '../types';
+
+interface WordPressProduct {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  content: {
+    rendered: string;
+  };
+  acf: {
+    precio_original: number;
+    precio_descuento: number;
+    en_stock: boolean;
+    imagen_del_producto: number;
+    especificaciones_producto: string;
+    categoria: string;
+  };
+  slug: string;
+  link: string;
+}
 
 interface ProductStore {
   products: Product[];
@@ -7,10 +27,8 @@ interface ProductStore {
   error: string | null;
   searchQuery: string;
   searchResults: Product[];
-  categories: Category[];
   searchProducts: (query: string) => Promise<void>;
   searchByCategoryID: (categoryId: string) => Promise<void>;
-  fetchCategories: () => Promise<void>;
   clearSearch: () => void;
 }
 
@@ -25,50 +43,64 @@ export const useProductStore = create<ProductStore>((set) => ({
   searchProducts: async (query: string) => {
     set({ loading: true, error: null });
     try {
-      const obtenerProductos = async () => {
-        try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}?consumer_key=${import.meta.env.VITE_CONSUMER_KEY}&consumer_secret=${import.meta.env.VITE_CONSUMER_SECRET}`);
-          if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-          }
-          const productos = await response.json();
-          set({ 
-            searchQuery: query,
-            searchResults: productos,
-          });
-        } catch (error) {
-          console.error('Error al obtener productos:', error);
-          set({ error: 'Error al obtener productos', loading: false });
-        }
-      };
-      obtenerProductos();
+      const response = await fetch(`${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wp/v2/productos?search=${query}&per_page=20`);
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      const productos = await response.json();
+      
+      // Map WordPress response to our Product type
+      const mappedProducts = productos.map((product: WordPressProduct) => ({
+        id: product.id,
+        title: product.title.rendered,
+        content: product.content.rendered,
+        price: product.acf?.precio_original || 0,
+        discountPrice: product.acf?.precio_descuento || 0,
+        inStock: product.acf?.en_stock || false,
+        productImage: product.acf?.imagen_del_producto || 0,
+        specifications: product.acf?.especificaciones_producto || '',
+        category: product.acf?.categoria || '',
+        slug: product.slug,
+        link: product.link
+      }));
+
+      set({ 
+        searchQuery: query,
+        searchResults: mappedProducts,
+        loading: false
+      });
     } catch (error) {
-      set({ error: 'Error searching products', loading: false });
-      console.error('Search error:', error);
+      console.error('Error al obtener productos:', error);
+      set({ error: 'Error al obtener productos', loading: false });
     }
   },
 
-  searchByCategoryID: async (categoryId: string) => {
+  searchByCategoryID: async (category: string) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wc/v3/products?category=${categoryId}&per_page=20`,
-        {
-          headers: {
-            'Authorization': 'Basic ' + btoa(
-              `${import.meta.env.VITE_CLAVE_CLIENTE}:${import.meta.env.VITE_CLAVE_SECRETA}`
-            )
-          }
-        }
-      );
-      
+      const response = await fetch(`${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wp/v2/productos?acf[categoria]=${category}`);
       if (!response.ok) {
         throw new Error('Error fetching products by category');
       }
-      
       const results = await response.json();
+      
+      // Map WordPress response to our Product type
+      const mappedProducts = results.map((product: WordPressProduct) => ({
+        id: product.id,
+        title: product.title.rendered,
+        content: product.content.rendered,
+        price: product.acf?.precio_original || 0,
+        discountPrice: product.acf?.precio_descuento || 0,
+        inStock: product.acf?.en_stock || false,
+        productImage: product.acf?.imagen_del_producto || 0,
+        specifications: product.acf?.especificaciones_producto || '',
+        category: product.acf?.categoria?.[0] || '',
+        slug: product.slug,
+        link: product.link
+      }));
+
       set({ 
-        products: results,
+        products: mappedProducts,
         loading: false 
       });
     } catch (error) {
@@ -77,39 +109,37 @@ export const useProductStore = create<ProductStore>((set) => ({
     }
   },
 
-  fetchCategories: async () => {
+  fetchProducts: async () => {
     set({ loading: true, error: null });
     try {
-      // Verificar que la URL termina correctamente
-      const baseUrl = import.meta.env.VITE_WORDPRESS_URL.endsWith('/') 
-        ? import.meta.env.VITE_WORDPRESS_URL 
-        : `${import.meta.env.VITE_WORDPRESS_URL}/`;
-        
-      const response = await fetch(
-        `${baseUrl}wp-json/wc/v3/products/categories?per_page=20`,
-        {
-          headers: {
-            'Authorization': 'Basic ' + btoa(
-              `${import.meta.env.VITE_CLAVE_CLIENTE}:${import.meta.env.VITE_CLAVE_SECRETA}`
-            ),
-            'Accept': 'application/json'  // Asegurarnos de que solicitamos JSON
-          }
-        }
-      );
-      
+      const response = await fetch(`${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wp/v2/productos?per_page=20`);
       if (!response.ok) {
-        console.error('Error response:', await response.text());
-        throw new Error(`Error fetching categories: ${response.status}`);
+        throw new Error(`Error fetching products: ${response.status}`);
       }
+      const productos = await response.json();
       
-      const categories = await response.json();
+      // Map WordPress response to our Product type
+      const mappedProducts = productos.map((product: WordPressProduct) => ({
+        id: product.id,
+        title: product.title.rendered,
+        content: product.content.rendered,
+        price: product.acf?.precio_original || 0,
+        discountPrice: product.acf?.precio_descuento || 0,
+        inStock: product.acf?.en_stock || false,
+        productImage: product.acf?.imagen_del_producto || 0,
+        specifications: product.acf?.especificaciones_producto || '',
+        category: product.acf?.categoria || '',
+        slug: product.slug,
+        link: product.link
+      }));
+
       set({ 
-        categories,
+        products: mappedProducts,
         loading: false 
       });
     } catch (error) {
-      set({ error: 'Error fetching categories', loading: false, categories: [] });
-      console.error('Categories error:', error);
+      set({ error: 'Error fetching products', loading: false });
+      console.error('Products error:', error);
     }
   },
 

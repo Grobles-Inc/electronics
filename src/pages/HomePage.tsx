@@ -1,13 +1,13 @@
-import { Home, Smartphone, Sparkles, Tv } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import ProductsSection from '../components/Section';
 
-
 const categories = [
-  { name: 'Electrónicos', section: 'electronicos', icon: <Tv size={18} className="mr-2" /> },
-  { name: 'Telefonía', section: 'telefonia', icon: <Smartphone size={18} className="mr-2" /> },
-  { name: 'Casa, Hogar y Tendencias', section: 'hogar-cocina', icon: <Home size={18} className="mr-2" /> },
-  { name: 'Perfumería y Cosméticos', section: 'perfumeria-cosmeticos', icon: <Sparkles size={18} className="mr-2" /> },
+  { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
+  { name: 'Telefonía', section: '#telefonia', id: 'telefonia' },
+  { name: 'Casa', section: '#casa', id: 'casa' },
+  { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
+  { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
+  { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
 ];
 export default function HomePage() {
   return (
@@ -28,13 +28,9 @@ export default function HomePage() {
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp" className="w-8 h-8" />
         </div>
       </a>
-      <ProductsSection section={{
-        id: 'ofertas-del-dia',
-        name: 'Ofertas del Día',
-      }} />
-      {categories.map(({ name, section }) => (
+      {categories.map(({ name, section, id }) => (
         <ProductsSection key={section} section={{
-          id: section,
+          id,
           name,
         }} />
       ))}
