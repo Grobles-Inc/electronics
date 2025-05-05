@@ -4,7 +4,7 @@ import products from '../data/products.json'
 export default function ProductsSection({ section }: { section: Section }) {
   return (
     <>
-      <section id={section.id} className=" mx-auto  py-6" data-aos="fade-left" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
+      <section id={section.id} className=" mx-auto  py-6" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
         <h2 className="text-2xl font-bold  mb-6">{section.name}</h2>
         <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
           {products.map((product, index) => (

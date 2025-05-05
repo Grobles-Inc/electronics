@@ -1,5 +1,5 @@
 // Product.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import { useOrderStore } from '../stores/order';
 import { type Product } from '../types';
@@ -7,6 +7,10 @@ import { type Product } from '../types';
 
 
 const Product: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { addToCart } = useOrderStore()
 
   const product = {
