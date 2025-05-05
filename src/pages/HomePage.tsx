@@ -3,7 +3,7 @@ import ProductsSection from '../components/Section';
 
 const categories = [
   { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
-  { name: 'Telefonía', section: '#telefonia', id: 'telefonia' },
+  { name: 'Telefonía', section: '#telefonia', id: 'telefonos' },
   { name: 'Casa', section: '#casa', id: 'casa' },
   { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
   { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },

@@ -78,9 +78,10 @@ export const useProductStore = create<ProductStore>((set) => ({
   searchByCategoryID: async (category: string) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wp/v2/productos?acf[categoria]=${category}`);
+      const response = await fetch(`${import.meta.env.VITE_WORDPRESS_URL}/wp-json/wp/v2/productos`);
       if (!response.ok) {
         throw new Error('Error fetching products by category');
+        console.log(response);
       }
       const results = await response.json();
       
@@ -94,13 +95,13 @@ export const useProductStore = create<ProductStore>((set) => ({
         inStock: product.acf?.en_stock || false,
         productImage: product.acf?.imagen_del_producto || 0,
         specifications: product.acf?.especificaciones_producto || '',
-        category: product.acf?.categoria?.[0] || '',
+        category: product.acf?.categoria || '',
         slug: product.slug,
         link: product.link
       }));
 
       set({ 
-        products: mappedProducts,
+        products: mappedProducts.filter((product: WordPressProduct) => product.acf?.categoria === category),
         loading: false 
       });
     } catch (error) {
