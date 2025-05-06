@@ -1,33 +1,52 @@
-import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useProductStore } from '../stores/product';
 import { type Section } from '../types';
 import ProductCard from './ProductCard';
+import { useEffect, useState } from 'react';
+import { Product } from '../types';
+import toast from 'react-hot-toast';
+import { Loader } from 'lucide-react';
 
 export default function ProductsSection({ section }: { section: Section }) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const { searchByCategoryID, products } = useProductStore();
-
-  const fetchProductsByCategory = useCallback(async () => {
-    if (!section.id || section.id === 'telefonos') return;
-    setIsLoading(true);
+  async function fetchProducts() {
+    setLoading(true);
     try {
-      await searchByCategoryID(section.id);
+      const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=20&acf_format=standard`);
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      const productos = await response.json();
+      setProducts(productos);
+      setLoading(false);
     } catch (error) {
-      console.error(`Error loading products for category ${section.name}:`, error);
-    } finally {
-      setIsLoading(false);
+      console.error('Error al obtener productos:', error);
+      setError('Error al obtener productos');
+      setLoading(false);
     }
-  }, [section.id, section.name, searchByCategoryID]);
-
-  useEffect(() => {
-    fetchProductsByCategory();
-  }, [section.id]);
-
+  }
   const handleSeeAll = () => {
     navigate(`/${section.id}`);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <div className='min-h-screen flex items-center justify-center'>
+      <div className='flex flex-col items-center'>
+        <Loader className='animate-spin' size={24} />
+        <p className='text-center text-gray-600'>Cargando productos...</p>
+      </div>
+    </div>;
+  }
+
+  if (error) {
+    return toast.error(error);
+  }
 
   return (
     <div>
@@ -37,12 +56,8 @@ export default function ProductsSection({ section }: { section: Section }) {
           <button className="btn btn-link btn-sm btn-success" onClick={handleSeeAll}>Ver todos</button>
         </div>
         <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
-          {isLoading ? (
-            <div className="flex items-center justify-center w-full h-24">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-            </div>
-          ) : products.length > 0 ? (
-            products.slice(0, 5).map((product) => (
+          {products.length > 0 ? (
+            products.slice(0, 5).map((product: Product) => (
               <div key={product.id} className="inline-block">
                 <ProductCard product={product} />
               </div>

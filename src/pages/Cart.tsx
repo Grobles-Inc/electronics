@@ -15,8 +15,7 @@ export default function Cart() {
     updateQuantity(productId, newQuantity)
   };
 
-  // Calculate total
-  const totalPrice = products.reduce((sum, product) => sum + (product.discountPrice ? product.discountPrice : product.originalPrice) * product.quantity, 0);
+  const totalPrice = products.reduce((sum, product) => sum + (product.acf.precio_descuento ? product.acf.precio_descuento : product.acf.precio_original) * product.quantity, 0);
 
 
   return (

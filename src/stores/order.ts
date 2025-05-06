@@ -51,13 +51,13 @@ export const useOrderStore = create<CartState>()(
       });
     },
     removeFromCart: (productId) => {
-      set((state: CartState) => ({ items: state.items.filter((item) => item.id !== productId) }));
+      set((state: CartState) => ({ items: state.items.filter((item) => item.id !== Number(productId)) }));
     },
     clearCart: () => set({ items: [] }),
     updateQuantity: (productId, quantity) => {
       set((state: CartState) => ({
         items: state.items.map((item) =>
-          item.id === productId ? { ...item, quantity } : item
+          item.id === Number(productId) ? { ...item, quantity } : item
         ),
       }));
     },
@@ -68,7 +68,7 @@ export const useOrderStore = create<CartState>()(
       return get().items.reduce(
         (sum, item) =>
           sum +
-          (Number(item.discountPrice) || Number(item.originalPrice)) *
+          (Number(item.acf?.precio_descuento) || Number(item.acf?.precio_original)) *
             (item.quantity || 1),
         0
       );

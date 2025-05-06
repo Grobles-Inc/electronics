@@ -1,9 +1,9 @@
 import { Loader } from 'lucide-react';
-import { use } from 'react';
+import { use, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import { useProductStore } from '../stores/product';
+import { Product } from '../types';
 
 async function fetchSearchResults(query: string | null, searchProducts: (query: string) => Promise<void>) {
   if (query) {
@@ -14,7 +14,37 @@ async function fetchSearchResults(query: string | null, searchProducts: (query: 
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
-  const { products, loading, error, searchProducts } = useProductStore();
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  async function searchProducts(query: string) {
+    setLoading(true);
+    try {
+      const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=20&acf_format=standard&search=${query}`);
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
+      const productos = await response.json();
+      const mappedProducts = productos.map((product: Product) => ({
+        id: product.id,
+        title: product.title.rendered,
+        content: product.content.rendered,
+        price: product.acf?.precio_original || 0,
+        discountPrice: product.acf?.precio_descuento || 0,
+        inStock: product.acf?.en_stock || false,
+        images: product.acf?.imagen_del_producto || [],
+        slug: product.slug,
+      }));
+      setProducts(mappedProducts);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error al obtener productos:', error);
+      setError('Error al obtener productos');
+      setLoading(false);
+    }
+  }
 
   use(fetchSearchResults(query, searchProducts));
 

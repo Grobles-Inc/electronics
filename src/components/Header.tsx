@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { useOrderStore } from '../stores/order';
-import { useProductStore } from '../stores/product';
 const categories = [
-  { name: 'Electrónicos', section: '#electronicos' },
-  { name: 'Telefonía', section: '#telefonia' },
-  { name: 'Casa', section: '#casa' },
-  { name: 'Hogar y Cocina', section: '#hogar' },
-  { name: 'Tendencias', section: '#tendencias' },
-  { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos' },
+  { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
+  { name: 'Telefonía', section: '#telefonia', id: 'telefonos' },
+  { name: 'Casa', section: '#casa', id: 'casa' },
+  { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
+  { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
+  { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
 ];
 
 export default function Header() {
@@ -18,7 +17,6 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { items } = useOrderStore()
-  const { searchProducts } = useProductStore();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -26,14 +24,13 @@ export default function Header() {
 
   const handleSearch = async (query: string) => {
     try {
-      await searchProducts(query);
       navigate(`/search?query=${encodeURIComponent(query)}`);
     } catch (error) {
       console.error('Search error:', error);
     }
   };
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       handleSearch(searchQuery);
@@ -64,6 +61,7 @@ export default function Header() {
                   <input
                     type="text"
                     value={searchQuery}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearchSubmit(e)}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="bg-white rounded-full py-2 px-4 w-full text-black pr-10"
                     placeholder="¿Qué estás buscando?"

@@ -1,6 +1,5 @@
 import Carousel from '../components/Carousel';
 import ProductsSection from '../components/Section';
-
 const categories = [
   { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
   { name: 'Telefonía', section: '#telefonia', id: 'telefonos' },
@@ -9,7 +8,10 @@ const categories = [
   { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
   { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
 ];
+
+
 export default function HomePage() {
+
   return (
     <div >
       <Carousel />
