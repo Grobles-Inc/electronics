@@ -62,9 +62,13 @@ const Product: React.FC = () => {
               <h1 className="text-2xl font-bold mb-4">{product?.title.rendered}</h1>
 
               {/* Discount Badge */}
-              {/* <div className="mb-4">
-                <span className="badge badge-error text-white">-{product?.acf?.descuento}%</span>
-              </div> */}
+              <div className="mb-4">
+                {product?.acf?.precio_original && product?.acf?.precio_descuento && (
+                  <span className="badge badge-error text-white">
+                    -{Math.round(((product.acf.precio_original - product.acf.precio_descuento) / product.acf.precio_original) * 100)}%
+                  </span>
+                )}
+              </div>
 
               {/* Price Information */}
               <div className="mb-4">

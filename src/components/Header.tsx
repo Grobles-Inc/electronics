@@ -6,10 +6,10 @@ import { useOrderStore } from '../stores/order';
 const categories = [
   { name: 'Electrónicos', id: 'electronicos' },
   { name: 'Telefonía', id: 'telefonia' },
-  { name: 'Casa', id: 'casa' },
+  { name: 'Informática', id: 'informatica' },
   { name: 'Hogar y Cocina', id: 'hogar' },
-  { name: 'Tendencias', id: 'tendencias' },
   { name: 'Perfumería y Cosméticos', id: 'perfumeria-cosmeticos' },
+  { name: 'Salud y Belleza', id: 'salud-belleza' },
 ];
 
 export default function Header() {
