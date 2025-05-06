@@ -14,7 +14,7 @@ export default function ProductsSection({ section }: { section: Section }) {
   async function fetchProducts() {
     setLoading(true);
     try {
-      const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=20&acf_format=standard`);
+      const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=5&acf_format=standard`);
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
@@ -31,9 +31,19 @@ export default function ProductsSection({ section }: { section: Section }) {
     navigate(`/${section.id}`);
   };
 
+  const filteredProducts = products.filter((product: Product) => {
+    // Normalize both strings to remove accents and convert to lowercase
+    const normalize = (str: string) =>
+      str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+
+    const productCategory = product.acf?.categoria || '';
+    return normalize(productCategory) === normalize(section.id);
+  });
+  console.log(filteredProducts);
+
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [section.id]);
 
   if (loading) {
     return <div className='min-h-screen flex items-center justify-center'>
@@ -56,8 +66,8 @@ export default function ProductsSection({ section }: { section: Section }) {
           <button className="btn btn-link btn-sm btn-success" onClick={handleSeeAll}>Ver todos</button>
         </div>
         <div className="overflow-x-auto  flex gap-4 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-transparent">
-          {products.length > 0 ? (
-            products.slice(0, 5).map((product: Product) => (
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product: Product) => (
               <div key={product.id} className="inline-block">
                 <ProductCard product={product} />
               </div>

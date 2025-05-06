@@ -2,12 +2,12 @@ import Carousel from '../components/Carousel';
 import ProductsSection from '../components/Section';
 const categories = [
   { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
-  { name: 'Telefonía', section: '#telefonia', id: 'telefonos' },
+  { name: 'Telefonía', section: '#telefonia', id: 'telefonia' },
   { name: 'Casa', section: '#casa', id: 'casa' },
   { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
   { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
   { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
-];
+] as const; // Ensure type safety with const assertion
 
 
 export default function HomePage() {
