@@ -32,14 +32,12 @@ export default function ProductsSection({ section }: { section: Section }) {
   };
 
   const filteredProducts = products.filter((product: Product) => {
-    // Normalize both strings to remove accents and convert to lowercase
     const normalize = (str: string) =>
       str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
 
     const productCategory = product.acf?.categoria || '';
     return normalize(productCategory) === normalize(section.id);
   });
-  console.log(filteredProducts);
 
   useEffect(() => {
     fetchProducts();

@@ -4,12 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { useOrderStore } from '../stores/order';
 const categories = [
-  { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
-  { name: 'Telefonía', section: '#telefonia', id: 'telefonos' },
-  { name: 'Casa', section: '#casa', id: 'casa' },
-  { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
-  { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
-  { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
+  { name: 'Electrónicos', id: 'electronicos' },
+  { name: 'Telefonía', id: 'telefonia' },
+  { name: 'Casa', id: 'casa' },
+  { name: 'Hogar y Cocina', id: 'hogar' },
+  { name: 'Tendencias', id: 'tendencias' },
+  { name: 'Perfumería y Cosméticos', id: 'perfumeria-cosmeticos' },
 ];
 
 export default function Header() {
@@ -95,14 +95,14 @@ export default function Header() {
           <ul className="flex flex-col md:items-center md:flex-row md:justify-center space-y-2 md:space-y-0 md:py-1 py-4">
             {categories && categories.length > 0 ? categories.map((category, index) => (
               <li key={category.name} className="md:px-6 ">
-                <a
-                  href={category.section}
+                <Link
+                  to={`/${category.id}`}
                   className="flex py-2 text-gray-800 hover:text-[#ec3434] font-medium transition-colors"
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100 + 400}`}
                 >
                   {category.name}
-                </a>
+                </Link>
               </li>
             )) : (
               <li className="md:px-6">
