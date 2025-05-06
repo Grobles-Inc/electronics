@@ -18,10 +18,10 @@ root.render(
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/categoria/:categoryId" element={<Products />} />
           <Route path="/carrito" element={<Cart />} />
-          <Route path="/producto/:id" element={<ProductDetails />} />
           <Route path="/busqueda" element={<SearchResults />} />
-          <Route path=":categoryId" element={<Products />} />
+          <Route path="/producto/:id" element={<ProductDetails />} />
         </Route>
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>

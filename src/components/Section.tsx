@@ -28,7 +28,7 @@ export default function ProductsSection({ section }: { section: Section }) {
     }
   }
   const handleSeeAll = () => {
-    navigate(`/${section.id}`);
+    navigate(`/categoria/${section.id}`);
   };
 
   const filteredProducts = products.filter((product: Product) => {

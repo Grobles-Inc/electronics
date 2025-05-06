@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { CartItem, Product } from "../types";
-
+import { toast } from "react-hot-toast";
 
 
 interface CartState {
@@ -39,6 +39,7 @@ export const useOrderStore = create<CartState>()(
             ),
           };
         }
+        toast.success("Producto agregado al carrito");
         return {
           items: [
             ...state.items,

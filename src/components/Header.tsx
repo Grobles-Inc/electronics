@@ -24,7 +24,7 @@ export default function Header() {
 
   const handleSearch = async (query: string) => {
     try {
-      navigate(`/search?query=${encodeURIComponent(query)}`);
+      navigate(`/busqueda?query=${encodeURIComponent(query)}`);
     } catch (error) {
       console.error('Search error:', error);
     }
@@ -96,7 +96,7 @@ export default function Header() {
             {categories && categories.length > 0 ? categories.map((category, index) => (
               <li key={category.name} className="md:px-6 ">
                 <Link
-                  to={`/${category.id}`}
+                  to={`/categoria/${category.id}`}
                   className="flex py-2 text-gray-800 hover:text-[#ec3434] font-medium transition-colors"
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100 + 400}`}
@@ -109,9 +109,14 @@ export default function Header() {
                 <span className="flex py-2 text-gray-500">Cargando categorías...</span>
               </li>
             )}
-            <a href="#ofertas-del-dia" className="btn btn-error btn-sm" data-aos="zoom-in" data-aos-delay="500">
-              Ofertas del Día
-            </a>
+            <Link to="/carrito" className="btn btn-success btn-md md:hidden flex items-center gap-2" >
+              <ShoppingBag size={20} />
+              <span>
+
+                Carrito ({items.length})
+              </span>
+            </Link>
+
 
           </ul>
         </nav>

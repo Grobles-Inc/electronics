@@ -1,7 +1,6 @@
 // Product.tsx
 import { Loader } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import toast from "react-hot-toast";
 import { useParams } from 'react-router-dom';
 import { useOrderStore } from '../stores/order';
 import { type Product } from '../types/index'
@@ -153,7 +152,7 @@ const Product: React.FC = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="btn btn-error text-white w-full mb-4" onClick={() => { addToCart(product!, 1); toast.success("Producto agregado al carrito") }}>
+              <button className="btn btn-error text-white w-full mb-4" onClick={() => addToCart(product!, 1)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -174,34 +173,14 @@ const Product: React.FC = () => {
                 <tbody>
                   {product?.acf?.especificaciones_producto.split(',').map((spec: string, index: number) => (
                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                      <td className="py-3 px-4 font-semibold">{spec}</td>
-                      <td className="py-3 px-4">{spec}</td>
+
+                      <td className="py-3 px-4">{spec.trim()}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-
-
-
-
-        {/* Same Category Products */}
-        {/* <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-          <div className="p-4">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Productos de la misma categoría</h2>
-              <a href={`/#${product?.acf?.categoria}`} className="text-sm text-blue-500 hover:underline">Ver más ›</a>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-              {product?.acf?.productos_de_la_misma_categoria.map((product) => (
-                <ProductCard key={product.id} product={{ ...product, stock: true, originalPrice: product.acf?.precio_original, discountPrice: product.acf?.precio_descuento }} />
-              ))}
-            </div>
-          </div>
-        </div> */}
+          </div>        </div>
       </div>
     </div>
   );

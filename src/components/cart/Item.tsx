@@ -11,13 +11,13 @@ const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center border-b py-4 gap-4">
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
-        <img src={product.image} alt={product.name} className="w-24 h-24 object-contain" />
+        <img src={product.acf.imagen_del_producto.url} alt={product.title.rendered} className="w-24 h-24 object-contain" />
 
         <div className="flex-1">
-          <div className="text-sm text-gray-600">Cód.: {product.code}</div>
-          <h3 className="font-medium">{product.name}</h3>
+          <div className="text-sm text-gray-600">Cód.: {product.id}</div>
+          <h3 className="font-medium">{product.title.rendered}</h3>
           <div className="text-red-500 font-bold mt-2">
-            S/. {product.discountPrice ? product.discountPrice.toFixed(2) : product.originalPrice.toFixed(2)}
+            S/. {(typeof product.acf.precio_descuento === 'number' ? product.acf.precio_descuento : Number(product.acf.precio_original)).toFixed(2)}
 
           </div>
         </div>
@@ -28,7 +28,7 @@ const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
           <button
             className="btn btn-sm btn-outline"
             disabled={product.quantity <= 1}
-            onClick={() => onQuantityChange(product.id, product.quantity - 1)}
+            onClick={() => onQuantityChange(product.id.toString(), product.quantity - 1)}
           >
             <Minus size={20} />
           </button>
@@ -40,7 +40,7 @@ const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
           />
           <button
             className="btn btn-sm btn-outline"
-            onClick={() => onQuantityChange(product.id, product.quantity + 1)}
+            onClick={() => onQuantityChange(product.id.toString(), product.quantity + 1)}
           >
             <Plus size={20} />
           </button>
@@ -48,7 +48,7 @@ const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
 
         <button
           className="btn btn-sm btn-error text-white rounded-full flex items-center"
-          onClick={() => onDelete(product.id)}
+          onClick={() => onDelete(product.id.toString())}
         >
           Eliminar <span className="ml-1">✕</span>
         </button>
