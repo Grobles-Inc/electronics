@@ -94,39 +94,39 @@ const Product: React.FC = () => {
 
               {/* Payment Options Section */}
               <div className="mb-6">
-                <h3 className="text-lg font-bold mb-2">TRANSFERENCIA & YAPE</h3>
+                <h3 className="text-lg font-bold mb-2">MÉTODOS DE PAGO</h3>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="flex items-center border rounded p-2">
                     <img
-                      src="https://img.icons8.com/?size=100&id=11079&format=png&color=000000"
+                      src="https://productos.tribuexcel.com/wp-content/uploads/2020/12/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos-705x210-1.png"
                       alt="Itaú"
-                      className="h-8"
+                      className="h-6"
                     />
-                    <span className="text-xs ml-2">hasta 18 cuotas</span>
+                    <span className="text-xs ml-2">Pago con Tarjeta</span>
                   </div>
                   <div className="flex items-center border rounded p-2">
                     <img
-                      src="https://img.icons8.com/?size=100&id=11079&format=png&color=000000"
+                      src="https://logosenvector.com/logo/img/banco-de-credito-bcp-82.jpg"
                       alt="Banco Basa"
-                      className="h-8"
+                      className="h-6"
                     />
-                    <span className="text-xs ml-2">hasta 18 cuotas</span>
+                    <span className="text-xs ml-2">Transferencia Bancaria</span>
                   </div>
                   <div className="flex items-center border rounded p-2">
                     <img
-                      src="https://img.icons8.com/?size=100&id=11079&format=png&color=000000"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxSpUKjC7Qx78v8bl-a1xcveAauYNHctMm7Q&s"
                       alt="Atlas"
-                      className="h-8"
+                      className="h-6"
                     />
-                    <span className="text-xs ml-2">hasta 12 cuotas</span>
+                    <span className="text-xs ml-2">Pago Contraentrega</span>
                   </div>
                   <div className="flex items-center border rounded p-2">
                     <img
-                      src="https://img.icons8.com/?size=100&id=11081&format=png&color=000000"
+                      src="https://logosenvector.com/logo/img/yape-bcp-4390.jpg"
                       alt="yape"
                       className="h-8"
                     />
-                    <span className="text-xs ml-2">999 999 999</span>
+                    <span className="text-xs ml-2">Yape o Plin</span>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ const Product: React.FC = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500 mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                   </svg>
-                  <span className="text-xs">Compras únicamente con C.I. o pasaporte.</span>
+                  <span className="text-xs">Compras únicamente a través de nuestros canales oficiales.</span>
                 </div>
 
                 <div className="flex flex-col items-center p-2 border rounded text-center">

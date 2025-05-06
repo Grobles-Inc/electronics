@@ -2,6 +2,7 @@ import { ArrowLeft, CreditCard, ShoppingBag, Trash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Item from '../components/cart/Item';
 import { useOrderStore } from '../stores/order';
+import { formatWhatsappOrder } from '../utils/whatsapp';
 
 export default function Cart() {
   const { items: products, removeFromCart, updateQuantity, clearCart } = useOrderStore()
@@ -17,6 +18,23 @@ export default function Cart() {
 
   const totalPrice = products.reduce((sum, product) => sum + (product.acf.precio_descuento ? product.acf.precio_descuento : product.acf.precio_original) * product.quantity, 0);
 
+  const handleFinalizarCompra = () => {
+    if (products.length === 0) {
+      alert('Tu carrito está vacío. Añade productos antes de finalizar la compra.');
+      return;
+    }
+
+    const whatsappUrl = formatWhatsappOrder({
+      items: products.map(product => ({
+        name: product.title.rendered || 'Producto sin nombre',
+        quantity: product.quantity,
+        price: product.acf.precio_descuento ? product.acf.precio_descuento : product.acf.precio_original
+      })),
+      total: totalPrice
+    });
+
+    window.open(whatsappUrl, '_blank');
+  };
 
   return (
 
@@ -59,14 +77,19 @@ export default function Cart() {
             </div>
           </div>
 
-
-
         </div>
         <div className="flex flex-col gap-2 my-10 btn-xl">
-          <button className="btn btn-accent btn-lg rounded-xl" >Finalizar Comprar</button>
+          <button 
+            className="btn btn-accent btn-lg rounded-xl" 
+            onClick={handleFinalizarCompra}
+            disabled={products.length === 0}
+          >
+            Finalizar Compra
+          </button>
           <button className="btn btn-link btn-sm" onClick={() => navigate('/')}>
             <ArrowLeft size={18} />
-            Continuar comprando</button>
+            Continuar comprando
+          </button>
         </div>
       </div>
     </div>

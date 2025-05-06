@@ -1,15 +1,15 @@
-import { Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { Menu, Search, ShoppingBag, X, Cpu, Smartphone, Monitor, Home, ShoppingCart, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.png';
 import { useOrderStore } from '../stores/order';
 const categories = [
-  { name: 'Electrónicos', id: 'electronicos' },
-  { name: 'Telefonía', id: 'telefonia' },
-  { name: 'Informática', id: 'informatica' },
-  { name: 'Hogar y Cocina', id: 'hogar' },
-  { name: 'Perfumería y Cosméticos', id: 'perfumeria-cosmeticos' },
-  { name: 'Salud y Belleza', id: 'salud-belleza' },
+  { name: 'Electrónicos', id: 'electronicos', icon: <Cpu size={18} /> },
+  { name: 'Telefonía', id: 'telefonia', icon: <Smartphone size={18} /> },
+  { name: 'Informática', id: 'informatica', icon: <Monitor size={18} /> },
+  { name: 'Hogar y Cocina', id: 'hogar', icon: <Home size={18} /> },
+  { name: 'Perfumería y Cosméticos', id: 'perfumeria-cosmeticos', icon: <ShoppingCart size={18} /> },
+  { name: 'Salud y Belleza', id: 'salud-belleza', icon: <Sparkles size={18} /> },
 ];
 
 export default function Header() {
@@ -101,7 +101,8 @@ export default function Header() {
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100 + 400}`}
                 >
-                  {category.name}
+                  {category.icon}
+                  <span className="ml-2 text-[15px]">{category.name}</span>
                 </Link>
               </li>
             )) : (
