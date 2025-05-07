@@ -8,7 +8,7 @@ export interface WhatsappOrderParams {
 }
 
 export function formatWhatsappOrder({ items, total }: WhatsappOrderParams, device: 'web' | 'mobile' = 'web'): string {
-  const phoneNumber = "51914019629";
+  const phoneNumber = "51910959065";
   
   const productLines = items
     .map(
@@ -39,7 +39,7 @@ export function formatWhatsappOrder({ items, total }: WhatsappOrderParams, devic
 }
 
 export function formatWhatsappContact({ nombre, correo, celular, mensaje }: { nombre: string; correo: string; celular: string; mensaje: string }, device: 'web' | 'mobile' = 'web') {
-  const phoneNumber = "51914019629";
+  const phoneNumber = "51910959065";
   const text = [
     "¡Hola Beltec Import!",
     "",
