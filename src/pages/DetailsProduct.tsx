@@ -72,20 +72,21 @@ const Product: React.FC = () => {
                     key={idx}
                     src={img}
                     alt={product?.title.rendered}
-                    className={`max-h-96 object-contain absolute left-0 top-0 w-full h-full transition-opacity duration-500 ${activeSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                    className={`w-full h-64 md:h-96 object-contain absolute left-0 top-0 transition-opacity duration-500 ${activeSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
                     style={{ background: '#fff' }}
+                    draggable={false}
                   />
                 ))}
                 {/* Controles */}
                 {images.length > 1 && (
-                  <div className="absolute flex justify-between items-center w-full top-1/2 left-0 px-4 -translate-y-1/2 z-20">
+                  <div className="absolute flex justify-between items-center w-full top-1/2 left-0 px-2 md:px-4 -translate-y-1/2 z-20 mt-32 md:mt-0">
                     <button
-                      className="btn btn-circle"
+                      className="btn btn-circle btn-sm md:btn-md"
                       onClick={() => setActiveSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
                       aria-label="Anterior"
                     >❮</button>
                     <button
-                      className="btn btn-circle"
+                      className="btn btn-circle btn-sm md:btn-md"
                       onClick={() => setActiveSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
                       aria-label="Siguiente"
                     >❯</button>
@@ -95,7 +96,7 @@ const Product: React.FC = () => {
             </div>
 
             {/* Product Details */}
-            <div className="flex flex-col">
+            <div className="flex flex-col mt-64 md:mt-0">
               <h1 className="text-2xl font-bold mb-4">{product?.title.rendered}</h1>
 
               {/* Discount Badge */}
