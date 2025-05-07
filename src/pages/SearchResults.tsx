@@ -23,7 +23,7 @@ export default function SearchResults() {
 
     async function searchProducts() {
       try {
-        const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=20&acf_format=standard&search=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://beltecimport.store/wp-json/wp/v2/productos?per_page=20&acf_format=standard&search=${encodeURIComponent(query || '')}`);
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
         }
