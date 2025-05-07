@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Product } from '../types';
 import toast from 'react-hot-toast';
 import { Loader } from 'lucide-react';
+import Banner from '../assets/banner.png'
 
 export default function ProductsSection({ section }: { section: Section }) {
   const [loading, setLoading] = useState(true);
@@ -81,12 +82,12 @@ export default function ProductsSection({ section }: { section: Section }) {
       <div className=" mx-auto py-6" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
         <div className="grid grid-cols-2 gap-4">
           <img
-            src="https://xiaomiperu.com/media/MISTORE_Banner_Web_13T-13C_1.jpg"
+            src={Banner}
             alt="Promoción 1"
             className="w-full h-auto object-cover rounded-lg shadow"
           />
           <img
-            src="https://tecstore.pe/media/amasty/bundle/frontend/TEC_STORE_Semana_3_Celulares_Banner_Web_Cat_Desktop.jpg"
+            src={Banner}
             alt="Promoción 2"
             className="w-full h-auto object-cover rounded-lg shadow"
           />

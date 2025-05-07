@@ -1,5 +1,5 @@
 
-import { Minus, Plus, Trash, X } from "lucide-react";
+import { Minus, Plus, Trash } from "lucide-react";
 import { CartItem } from "../../types";
 
 interface ItemProps {
@@ -11,19 +11,23 @@ const Item = ({ product, onDelete, onQuantityChange }: ItemProps) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center p-4 gap-4 shadow-sm rounded-lg bg-white hover:shadow-md transition-shadow duration-200 mb-4">
       <div className="flex flex-col md:flex-row items-center gap-4 w-full">
-        <img src={product.acf.imagen_del_producto.url} alt={product.title.rendered} className="w-24 h-24 object-contain" />
-
+        <img src={product.acf.imagen_del_producto} alt={product.title.rendered} className="w-24 h-24 object-contain" />
         <div className="flex-1">
           <div className="text-sm text-gray-600">Cód.: {product.id}</div>
           <h3 className="font-medium">{product.title.rendered}</h3>
           <div className="text-red-500 font-bold mt-2">
-            S/. {Number(product.acf.precio_descuento || product.acf.precio_original).toFixed(2)}
-            {product.acf.precio_descuento && (
-              <span className="text-gray-500 text-sm line-through ml-2">
+            {product.acf.precio_descuento > 0 ? (
+              <>
+                S/. {Number(product.acf.precio_descuento).toFixed(2)}
+                <span className="text-gray-500 text-sm line-through ml-2">
+                  S/. {Number(product.acf.precio_original).toFixed(2)}
+                </span>
+              </>
+            ) : (
+              <>
                 S/. {Number(product.acf.precio_original).toFixed(2)}
-              </span>
+              </>
             )}
-
           </div>
         </div>
       </div>

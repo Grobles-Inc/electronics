@@ -20,10 +20,10 @@ export interface Product {
     precio_original: number;
     precio_descuento: number;
     en_stock: boolean;
-    imagen_del_producto: {
-      id: number;
-      url: string;
-    }
+    imagen_del_producto: string;
+    imagen_del_producto_2: string;
+    imagen_del_producto_3: string;
+    imagen_del_producto_4: string;
     especificaciones_producto: string;
     categoria: string;
   };

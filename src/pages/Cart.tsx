@@ -18,7 +18,7 @@ export default function Cart() {
     updateQuantity(productId, newQuantity)
   };
 
-  const totalPrice = products.reduce((sum, product) => sum + (product.acf.precio_descuento ? product.acf.precio_descuento : product.acf.precio_original) * product.quantity, 0);
+  const totalPrice = products.reduce((sum, product) => sum + (product.acf.precio_descuento && product.acf.precio_descuento > 0 ? product.acf.precio_descuento : product.acf.precio_original) * product.quantity, 0);
 
   const handleFinalizarCompra = () => {
     if (products.length === 0) {

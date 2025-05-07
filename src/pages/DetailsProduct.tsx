@@ -1,6 +1,6 @@
 // Product.tsx
 import { Loader } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useOrderStore } from '../stores/order';
 import { type Product } from '../types/index'
@@ -15,6 +15,8 @@ const Product: React.FC = () => {
   const { addToCart } = useOrderStore()
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   async function fetchProduct() {
     setIsLoading(true);
@@ -33,8 +35,22 @@ const Product: React.FC = () => {
     fetchProduct();
   }, [id]);
 
-  if (isLoading) {
+  // Imágenes disponibles
+  const images = [
+    product?.acf?.imagen_del_producto,
+    product?.acf?.imagen_del_producto_2,
+    product?.acf?.imagen_del_producto_3,
+    product?.acf?.imagen_del_producto_4,
+  ].filter(Boolean);
 
+  // Scroll al top del carrusel al cambiar de slide
+  useEffect(() => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [activeSlide]);
+
+  if (isLoading) {
     return <div className="min-h-screen flex items-center justify-center">
       <Loader className="animate-spin" size={24} />
     </div>;
@@ -49,12 +65,33 @@ const Product: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
             {/* Product Image */}
-            <div className="flex justify-center items-center">
-              <img
-                src={product?.acf?.imagen_del_producto.url}
-                alt={product?.title.rendered}
-                className="max-h-96 object-contain"
-              />
+            <div className="relative" ref={carouselRef}>
+              <div className="w-full h-full relative">
+                {images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={product?.title.rendered}
+                    className={`max-h-96 object-contain absolute left-0 top-0 w-full h-full transition-opacity duration-500 ${activeSlide === idx ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                    style={{ background: '#fff' }}
+                  />
+                ))}
+                {/* Controles */}
+                {images.length > 1 && (
+                  <div className="absolute flex justify-between items-center w-full top-1/2 left-0 px-4 -translate-y-1/2 z-20">
+                    <button
+                      className="btn btn-circle"
+                      onClick={() => setActiveSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
+                      aria-label="Anterior"
+                    >❮</button>
+                    <button
+                      className="btn btn-circle"
+                      onClick={() => setActiveSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
+                      aria-label="Siguiente"
+                    >❯</button>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Product Details */}
@@ -62,32 +99,50 @@ const Product: React.FC = () => {
               <h1 className="text-2xl font-bold mb-4">{product?.title.rendered}</h1>
 
               {/* Discount Badge */}
-              <div className="mb-4">
-                {product?.acf?.precio_original && product?.acf?.precio_descuento && (
-                  <span className="badge badge-error text-white">
-                    -{Math.round(((product.acf.precio_original - product.acf.precio_descuento) / product.acf.precio_original) * 100)}%
-                  </span>
-                )}
-              </div>
+              {product?.acf.precio_descuento && product?.acf.precio_descuento > 0 &&
+                <div className="mb-4">
+                  {product?.acf?.precio_original && product?.acf?.precio_descuento && (
+                    <span className="badge badge-error text-white">
+                      -{Math.round(((product.acf.precio_original - product.acf.precio_descuento) / product.acf.precio_original) * 100)}%
+                    </span>
+                  )}
+                </div>
+              }
 
               {/* Price Information */}
               <div className="mb-4">
-                <div className="line-through text-gray-500">
-                  S/. {product?.acf?.precio_original}
-                </div>
-                <div className="flex items-center">
+                {product?.acf?.precio_descuento && product?.acf?.precio_descuento > 0 ? (
+                  <>
+                    <div className="line-through text-gray-500">
+                      S/. {product?.acf?.precio_original}
+                    </div>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img
+                          src="https://img.icons8.com/?size=100&id=eofZXRmqHHir&format=png&color=000000"
+                          alt="Peru"
+                          className="w-5 h-4 mr-2"
+                        />
+                        <span className="text-red-500 text-2xl font-bold">
+                          S/. {product?.acf?.precio_descuento}
+                        </span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
                   <div className="flex items-center">
-                    <img
-                      src="https://img.icons8.com/?size=100&id=eofZXRmqHHir&format=png&color=000000"
-                      alt="Peru"
-                      className="w-5 h-4 mr-2"
-                    />
-                    <span className="text-red-500 text-2xl font-bold">
-                      S/. {product?.acf?.precio_descuento}
-                    </span>
+                    <div className="flex items-center">
+                      <img
+                        src="https://img.icons8.com/?size=100&id=eofZXRmqHHir&format=png&color=000000"
+                        alt="Peru"
+                        className="w-5 h-4 mr-2"
+                      />
+                      <span className="text-red-500 text-2xl font-bold">
+                        S/. {product?.acf?.precio_original}
+                      </span>
+                    </div>
                   </div>
-                </div>
-
+                )}
               </div>
 
 

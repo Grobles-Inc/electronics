@@ -10,7 +10,8 @@ import ProductDetails from './pages/DetailsProduct'
 import Products from './pages/Products'
 import SearchResults from './pages/SearchResults'
 import Orders from './pages/Orders'
-
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import ContactFAQ from './pages/ContactFAQ'
 const root = createRoot(document.getElementById('root')!)
 
 root.render(
@@ -24,6 +25,8 @@ root.render(
           <Route path="/busqueda" element={<SearchResults />} />
           <Route path="/producto/:id" element={<ProductDetails />} />
           <Route path="/mis-pedidos" element={<Orders />} />
+          <Route path="/politica-de-privacidad" element={<PrivacyPolicy />} />
+          <Route path="/contacto" element={<ContactFAQ />} />
         </Route>
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>

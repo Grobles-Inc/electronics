@@ -3,7 +3,7 @@ import Logo from "../assets/logo.png"
 export default function Footer() {
   return (
     <footer className="bg-black text-white py-10 text-[200px]">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm  px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-sm  px-4 sm:px-6 md:px-8 lg:px-10">
         <div>
           <img src={Logo} alt="Logo" width={150} height={150} />
           <a href="https://wa.me/51995262244" className="hover:underline">(+51) 995 262 244</a>
@@ -39,16 +39,16 @@ export default function Footer() {
           </div>
         </div>
 
-
-
-
         {/* Páginas */}
         <div>
           <h3 className="font-bold mb-8">Páginas</h3>
           <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">Blog</a></li>
-            <li><a href="#" className="hover:underline">Refurbished</a></li>
-            <li><a href="#" className="hover:underline">Nuestras Marcas</a></li>
+            <li><a href="/categoria/electronicos" className="hover:underline">Electrónicos</a></li>
+            <li><a href="/categoria/telefonia" className="hover:underline">Telefonía</a></li>
+            <li><a href="/categoria/informatica" className="hover:underline">Informática</a></li>
+            <li><a href="/categoria/hogar-cocina" className="hover:underline">Hogar y Cocina</a></li>
+            <li><a href="/categoria/perfumeria-cosmeticos" className="hover:underline">Perfumería y Cosméticos</a></li>
+            <li><a href="/categoria/salud-belleza" className="hover:underline">Salud y Belleza</a></li>
           </ul>
         </div>
 
@@ -56,14 +56,19 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-8">Área del cliente</h3>
           <ul className="space-y-1">
-            <li><a href="#" className="hover:underline">¿Qué es el RTU?</a></li>
-            <li><a href="#" className="hover:underline">¿Cómo comprar?</a></li>
+            <li><a href="/politica-de-privacidad" className="hover:underline">Política de privacidad</a></li>
+          </ul>
+          <ul className="space-y-1">
+            <li><a href="/contacto" className="hover:underline">Contacto</a></li>
           </ul>
         </div>
       </div>
 
-      <div className="text-center mt-15 text-xs">
+      <div className="text-center mt-15 text-sm">
         <p>Beltec Import S.A. Todos los derechos reservados 2025</p>
+      </div>
+      <div className="text-center mt-5 text-sm">
+        Desarrollado por <a href="https://grobles.framer.website/" className="hover:underline text-[#fa7818]">Grobles S.A.</a>
       </div>
     </footer>
   );

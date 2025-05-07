@@ -3,10 +3,10 @@ import ProductsSection from '../components/Section';
 const categories = [
   { name: 'Electrónicos', section: '#electronicos', id: 'electronicos' },
   { name: 'Telefonía', section: '#telefonia', id: 'telefonia' },
-  { name: 'Casa', section: '#casa', id: 'casa' },
+  { name: 'Informatica', section: '#informatica', id: 'informatica' },
   { name: 'Hogar y Cocina', section: '#hogar', id: 'hogar' },
-  { name: 'Tendencias', section: '#tendencias', id: 'tendencias' },
   { name: 'Perfumería y Cosméticos', section: '#perfumeria-cosmeticos', id: 'perfumeria-cosmeticos' },
+  { name: 'Salud y Belleza', section: '#salud-belleza', id: 'salud-belleza' },
 ] as const; // Ensure type safety with const assertion
 
 

@@ -12,7 +12,7 @@ export default function Carousel() {
       title: 'PORTÁTILES',
       subtitle: 'ELECTRONICOS',
       buttonText: 'DESCUBRIR',
-      buttonLink: '/categoria/aire-acondicionado',
+      buttonLink: '/categoria/electronicos',
       image: 'https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?q=80&w=1280&auto=format&fit=crop',
       altText: 'Ofertas en Portátiles',
       iconName: 'laptop',
@@ -32,7 +32,7 @@ export default function Carousel() {
       title: 'AUDIO PREMIUM',
       subtitle: 'CALIDAD DE SONIDO',
       buttonText: 'EXPLORAR',
-      buttonLink: '/categoria/audio',
+      buttonLink: '/categoria/informatica',
       image: 'https://images.unsplash.com/photo-1545127398-14699f92334b?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       altText: 'Equipos de audio premium',
       iconName: 'headphones'
@@ -55,39 +55,39 @@ export default function Carousel() {
   const categories: Category[] = [
     {
       id: 1,
-      name: 'Bebidas',
-      image: 'https://images.unsplash.com/photo-1617122387493-34c22fc88560?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      path: '/categoria/bebidas'
+      name: 'Electrónicos',
+      image: 'https://images.unsplash.com/photo-1703060802519-d294f34da766?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      path: '/categoria/electronicos'
     },
     {
       id: 2,
-      name: 'Electrónicos',
-      image: 'https://images.unsplash.com/photo-1562408590-e32931084e23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      path: '/categoria/electronicos'
+      name: 'Telefonía',
+      image: 'https://beltecimport.store/wp-content/uploads/2025/04/Doble-linterna-VERYKOOL-T800.webp',
+      path: '/categoria/telefonia'
     },
     {
       id: 3,
       name: 'Informática',
-      image: 'https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      image: 'https://resource.megaeletronicos.com/uploads/Category/1739559279_1739559279_67af916f6d21b.webp',
       path: '/categoria/informatica'
     },
     {
       id: 4,
-      name: 'Perfumería',
-      image: 'https://images.unsplash.com/photo-1618994492420-b4f4d6b4890c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      path: '/categoria/perfumeria'
+      name: 'Hogar y Cocina',
+      image: 'https://img.freepik.com/foto-gratis/interiores-cocina-hogarena_53876-146777.jpg?ga=GA1.1.161279814.1746637218&semt=ais_hybrid&w=740',
+      path: '/categoria/hogar-cocina'
     },
     {
       id: 5,
-      name: 'Telefonía',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      path: '/categoria/telefonia'
+      name: 'Perfumería y Cosméticos',
+      image: 'https://img.freepik.com/foto-gratis/bodegon-kit-carrera-modelo_23-2150217985.jpg?ga=GA1.1.161279814.1746637218&semt=ais_hybrid&w=740',
+      path: '/categoria/perfumeria-cosmeticos'
     },
     {
       id: 6,
-      name: 'Sonido & Audio',
-      image: 'https://images.unsplash.com/photo-1703060802519-d294f34da766?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      path: '/categoria/sonido-audio'
+      name: 'Salud y Belleza',
+      image: 'https://images.unsplash.com/photo-1620905969379-74c206d60543?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      path: '/categoria/salud-belleza'
     }
   ];
 
