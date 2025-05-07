@@ -2,10 +2,12 @@ import { ArrowLeft, CreditCard, ShoppingBag, Trash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Item from '../components/cart/Item';
 import { useOrderStore } from '../stores/order';
+import { useOrdersStore } from '../stores/orders';
 import { formatWhatsappOrder } from '../utils/whatsapp';
 
 export default function Cart() {
   const { items: products, removeFromCart, updateQuantity, clearCart } = useOrderStore()
+  const { addOrder } = useOrdersStore();
   const navigate = useNavigate()
 
   const handleDelete = (productId: string) => {
@@ -24,6 +26,9 @@ export default function Cart() {
       return;
     }
 
+    // Save the order
+    addOrder(products, totalPrice);
+
     const whatsappUrl = formatWhatsappOrder({
       items: products.map(product => ({
         name: product.title.rendered || 'Producto sin nombre',
@@ -33,19 +38,25 @@ export default function Cart() {
       total: totalPrice
     });
 
+    // Clear the cart after saving the order
+    clearCart();
+
+    // Open WhatsApp
     window.open(whatsappUrl, '_blank');
+
+    // Navigate to orders page
+    navigate('/mis-pedidos');
   };
 
   return (
-
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-4">
       {/* Sidebar */}
       <div className="lg:col-span-1">
         <h2 className="text-2xl font-bold mb-6">Menú</h2>
         <div className=" shadow rounded-lg p-4">
           <ul className="menu space-y-2">
             <li><a className="flex items-center gap-2"><CreditCard size={24} /> Mis tarjetas</a></li>
-            <li><a className="flex items-center gap-2"><ShoppingBag size={24} /> Mis compras</a></li>
+            <li><a className="flex items-center gap-2" onClick={() => navigate('/mis-pedidos')}><ShoppingBag size={24} /> Mis compras</a></li>
             <li><button className="btn btn-outline btn-error btn-sm" onClick={() => { clearCart(); navigate('/') }}>
               <Trash size={18} />
               Vaciar carrito</button></li>
@@ -55,7 +66,7 @@ export default function Cart() {
 
       {/* Cart content */}
       <div className="lg:col-span-3">
-        <div className=" shadow rounded-lg p-6">
+        <div className="">
           <h2 className="text-2xl font-bold mb-6">Productos Agregados</h2>
 
           <div className="space-y-4">
@@ -79,8 +90,8 @@ export default function Cart() {
 
         </div>
         <div className="flex flex-col gap-2 my-10 btn-xl">
-          <button 
-            className="btn btn-accent btn-lg rounded-xl" 
+          <button
+            className="btn btn-accent btn-lg rounded-xl"
             onClick={handleFinalizarCompra}
             disabled={products.length === 0}
           >
@@ -93,8 +104,6 @@ export default function Cart() {
         </div>
       </div>
     </div>
-
-
   );
 };
 

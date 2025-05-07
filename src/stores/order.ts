@@ -77,7 +77,6 @@ export const useOrderStore = create<CartState>()(
   }))
 );
 
-// Persistencia en localStorage
 if (typeof window !== "undefined") {
   useOrderStore.subscribe((state) => {
     try {

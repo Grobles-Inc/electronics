@@ -7,21 +7,37 @@ export interface WhatsappOrderParams {
   total: number;
 }
 
-export function formatWhatsappOrder({ items, total }: WhatsappOrderParams): string {
+export function formatWhatsappOrder({ items, total }: WhatsappOrderParams, device: 'web' | 'mobile' = 'web'): string {
   const phoneNumber = "51914019629";
+  
+  // Format each product line with proper encoding
   const productLines = items
     .map(
       (item) =>
-        `- ${item.name} (x${item.quantity}) - S/. ${(item.price * item.quantity).toFixed(2)}`
+        `- ${encodeURIComponent(item.name)} (x${item.quantity}) - S/. ${(item.price * item.quantity).toFixed(2)}`
     )
-    .join("%0A");
+    .join("\n");
 
-  const message =
-    `¡Hola Beltec Import!%0A%0A` +
-    `Quisiera realizar el siguiente pedido:%0A%0A` +
-    `*Productos:*%0A${productLines}%0A%0A` +
-    `*Total:* S/. ${total.toFixed(2)}%0A%0A` +
-    `Aguardo su confirmación. Gracias.`;
+  // Build the message with proper line breaks and encoding
+  const message = [
+    "¡Hola Beltec Import!",
+    "",
+    "Quisiera realizar el siguiente pedido:",
+    "",
+    "*Productos:*",
+    productLines,
+    "",
+    `*Total:* S/. ${total.toFixed(2)}`,
+    "",
+    "Espero su confirmación. Gracias."
+  ].join("\n");
+
+  // Encode the entire message for URL
+  const encodedMessage = encodeURIComponent(message);
   
-  return `https://wa.me/${phoneNumber}?text=${message}`;
+  // Return the WhatsApp URL with the encoded message
+  const url = device === 'web' 
+    ? `https://web.whatsapp.com/send?phone=+${phoneNumber}&text=${encodedMessage}`
+    : `https://wa.me/+${phoneNumber}?text=${encodedMessage}`;
+  return url;
 }
