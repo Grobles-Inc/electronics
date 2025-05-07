@@ -46,7 +46,7 @@ export default function Header() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center justify-between w-full md:w-auto">
                 <Link to="/" className="text-white bg-orange-100 rounded-full font-bold text-2xl" data-aos="fade-down" data-aos-delay="100">
-                  <img src={Logo} alt="Logo" className='size-16 md:size-24' />
+                  <img src={Logo} alt="Logo" className='size-16 md:size-24' onClick={ () => setSearchQuery("")} />
                 </Link>
                 <button
                   className="md:hidden text-white"
@@ -61,7 +61,14 @@ export default function Header() {
                   <input
                     type="text"
                     value={searchQuery}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearchSubmit(e)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (searchQuery.trim()) {
+                          handleSearch(searchQuery);
+                        }
+                      }
+                    }}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="bg-white rounded-full py-2 px-4 w-full text-black pr-10"
                     placeholder="¿Qué estás buscando?"
