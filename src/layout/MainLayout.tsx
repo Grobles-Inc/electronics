@@ -32,7 +32,7 @@ export default function MainLayout() {
           <h3 className="font-semibold text-lg mb-4 text-center">Atención</h3>
           <FileWarning className="text-red-600 mb-4 mx-auto" size={44} />
           <p className="text-sm ">
-            Las ventas online y delivery solo están habilitadas para Paraguay, no tenemos cuentas bancárias en Brasil.<br />
+            Las ventas online y delivery solo están habilitadas para Perú.<br />
             No somos responsables por envíos de dinero a nuestros vendedores.
           </p>
         </div>

@@ -63,7 +63,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center mt-15 text-xs">
-        <p>Mega Electrónicos de Importadora Américas S.A. Todos los derechos reservados 2025</p>
+        <p>Beltec Import S.A. Todos los derechos reservados 2025</p>
       </div>
     </footer>
   );
