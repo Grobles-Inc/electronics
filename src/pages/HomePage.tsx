@@ -17,7 +17,7 @@ export default function HomePage() {
       <Carousel />
       {/* Botón flotante de WhatsApp */}
       <a
-        href="https://api.whatsapp.com/send?phone=595981123456&text=Hola%21%20Quiero%20hacer%20un%20pedido"
+        href="https://api.whatsapp.com/send?phone=51910959065&text=Hola%21%20Quiero%20hacer%20un%20pedido"
         className="fixed bottom-4 right-4 z-10"
         target="_blank"
         rel="noopener noreferrer"
