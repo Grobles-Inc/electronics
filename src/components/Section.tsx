@@ -6,6 +6,11 @@ import { Product } from '../types';
 import toast from 'react-hot-toast';
 import { Loader } from 'lucide-react';
 import Banner from '../assets/banner.png'
+import Informatica from '../assets/banner6.png'
+import Telefonia from '../assets/banner3.png'
+import SaludBelleza from '../assets/banner2.png'
+import HogarYCocina from '../assets/banner4.png'
+import PerfumeriaCosmeticos from '../assets/banner5.png'
 
 export default function ProductsSection({ section }: { section: Section }) {
   const [loading, setLoading] = useState(true);
@@ -80,17 +85,60 @@ export default function ProductsSection({ section }: { section: Section }) {
       </section>
       {/* Imágenes promocionales */}
       <div className=" mx-auto py-6" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="500" data-aos-once="true">
-        <div className="grid grid-cols-2 gap-4">
-          <img
-            src={Banner}
-            alt="Promoción 1"
-            className="w-full h-auto object-cover rounded-lg shadow"
-          />
-          <img
-            src={Banner}
-            alt="Promoción 2"
-            className="w-full h-auto object-cover rounded-lg shadow"
-          />
+        <div className="grid grid-cols-2 gap-4 px-4 md:px-0">
+          {(() => {
+            switch (section.id) {
+              case 'electronicos':
+                return (
+                  <>
+                    <img src={Banner} alt="Electrónicos" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={Banner} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              case 'informatica':
+                return (
+                  <>
+                    <img src={Informatica} alt="Informática" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={Informatica} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              case 'telefonia':
+                return (
+                  <>
+                    <img src={Telefonia} alt="Telefonía" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={Telefonia} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              case 'salud-belleza':
+                return (
+                  <>
+                    <img src={SaludBelleza} alt="Salud y Belleza" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={SaludBelleza} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              case 'hogar':
+                return (
+                  <>
+                    <img src={HogarYCocina} alt="Hogar y Cocina" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={HogarYCocina} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              case 'perfumeria-cosmeticos':
+                return (
+                  <>
+                    <img src={PerfumeriaCosmeticos} alt="Perfumería y Cosméticos" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={PerfumeriaCosmeticos} alt="Promoción" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+              default:
+                return (
+                  <>
+                    <img src={Banner} alt="Promoción 1" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                    <img src={Banner} alt="Promoción 2" className="w-full h-[200px] object-cover rounded-lg shadow" />
+                  </>
+                );
+            }
+          })()}
         </div>
       </div>
     </div>
