@@ -1,0 +1,39 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Component Structure Guide
+
+## Component Organization
+Components are organized in the following structure:
+
+### Layout Components
+Located in `src/layout/`:
+- [Header.tsx](mdc:src/layout/Header.tsx) - Main navigation header
+- [Footer.tsx](mdc:src/layout/Footer.tsx) - Site footer
+- [Sidebar.tsx](mdc:src/layout/Sidebar.tsx) - Navigation sidebar
+
+### Page Components
+Located in `src/pages/`:
+- [Home.tsx](mdc:src/pages/Home.tsx) - Home page
+- [Products.tsx](mdc:src/pages/Products.tsx) - Products listing
+- [ProductDetail.tsx](mdc:src/pages/ProductDetail.tsx) - Individual product view
+- [Cart.tsx](mdc:src/pages/Cart.tsx) - Shopping cart
+- [Checkout.tsx](mdc:src/pages/Checkout.tsx) - Checkout process
+
+### Reusable Components
+Located in `src/components/`:
+- [ProductCard.tsx](mdc:src/components/ProductCard.tsx) - Product display card
+- [Button.tsx](mdc:src/components/Button.tsx) - Reusable button component
+- [Input.tsx](mdc:src/components/Input.tsx) - Form input component
+- [Modal.tsx](mdc:src/components/Modal.tsx) - Modal dialog component
+
+## Component Guidelines
+1. Each component should be in its own directory with its associated files
+2. Use TypeScript for all components
+3. Follow the naming convention: PascalCase for component files
+4. Include proper type definitions for props
+5. Use TailwindCSS for styling
+6. Implement proper error boundaries where needed
+

@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Routing Guide
+
+## Route Structure
+The application uses React Router for navigation. Routes are defined in the main application file:
+
+### Main Routes
+- `/` - Home page
+- `/products` - Products listing
+- `/products/:id` - Individual product view
+- `/cart` - Shopping cart
+- `/checkout` - Checkout process
+- `/account` - User account management
+
+## Route Configuration
+Routes are configured in [main.tsx](mdc:src/main.tsx) using React Router's createBrowserRouter.
+
+## Navigation Guidelines
+1. Use the `useNavigate` hook for programmatic navigation
+2. Use `Link` component for declarative navigation
+3. Implement proper route guards for protected routes
+4. Handle 404 routes appropriately
+5. Use lazy loading for route components
+
+## Example Route Usage
+```typescript
+// Using navigation in a component
+import { useNavigate } from 'react-router-dom';
+
+function ProductCard({ id }) {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    navigate(`/products/${id}`);
+  };
+  
+  return <div onClick={handleClick}>...</div>;
+}
+```
+
+## Route Protection
+Protected routes should be wrapped with appropriate authentication checks and redirect unauthorized users to the login page.
+

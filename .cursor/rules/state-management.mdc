@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# State Management Guide
+
+## Zustand Store Structure
+State management is handled using Zustand stores located in `src/stores/`:
+
+### Main Stores
+- [useCartStore.ts](mdc:src/stores/useCartStore.ts) - Shopping cart state
+- [useProductStore.ts](mdc:src/stores/useProductStore.ts) - Product data and filtering
+- [useAuthStore.ts](mdc:src/stores/useAuthStore.ts) - Authentication state
+- [useUIStore.ts](mdc:src/stores/useUIStore.ts) - UI state (modals, loading states, etc.)
+
+## Store Guidelines
+1. Each store should be focused on a specific domain
+2. Use TypeScript interfaces for store state
+3. Implement proper state persistence where needed
+4. Use middleware for logging and persistence
+5. Keep stores modular and avoid circular dependencies
+
+## Example Store Usage
+```typescript
+// Using a store in a component
+import { useCartStore } from '@/stores/useCartStore';
+
+function CartComponent() {
+  const { items, addItem, removeItem } = useCartStore();
+  // Component implementation
+}
+```
+
+## State Management Best Practices
+1. Keep state normalized
+2. Use selectors for derived state
+3. Implement proper error handling
+4. Use TypeScript for type safety
+5. Follow the single responsibility principle
+
